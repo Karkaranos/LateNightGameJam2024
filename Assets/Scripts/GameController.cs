@@ -1,5 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+/*****************************************************************************
+// File Name :         GameController.cs
+// Author :            Cade R. Naylor
+// Creation Date :     January 26, 2024
+//
+// Brief Description : Creates a game controller. Handles shelving objects, scoring, and 
+                        spawning new objects
+
+*****************************************************************************/
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -21,6 +28,7 @@ public class GameController : MonoBehaviour
 
 
     private ObjectHandler oh;
+    private OrderHandler orh;
 
     //References to input
     private PlayerInput mouseControls;
@@ -32,6 +40,8 @@ public class GameController : MonoBehaviour
     private GameObject currentlyGrabbed;
 
     private int failCounter = 0;
+
+    private Constants CONST;
 
     public GameObject[] ShelvesVis { get => shelvesVis; set => shelvesVis = value; }
 
@@ -46,6 +56,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         oh = FindObjectOfType<ObjectHandler>();
+        orh = FindObjectOfType<OrderHandler>();
 
         mouseControls = GetComponent<PlayerInput>();
         mouseControls.currentActionMap.Enable();
@@ -64,10 +75,10 @@ public class GameController : MonoBehaviour
 
         //Spawn the shelves
         int counter = 0;
-        for(int i=0; i<3; i++)
+        for(int i=0; i<CONST.GRID_SIZE; i++)
         {
             spawnPos.x = topRightSpawnPos.x;
-            for(int j=0; j<3; j++)
+            for(int j=0; j< CONST.GRID_SIZE; j++)
             {
                 ShelvesVis[counter] = Instantiate(emptyPlace, spawnPos, Quaternion.identity);
                 spawnPos.x += spaceBetweenSpots;
@@ -77,7 +88,7 @@ public class GameController : MonoBehaviour
         }
 
         //Set shelf references
-        for(int i=0; i<9; i++)
+        for(int i=0; i< CONST.GRID_SIZE * CONST.GRID_SIZE; i++)
         {
             shelfSpot[i] = ShelvesVis[i].transform.position;
             ShelvesVis[i].GetComponent<ConstantStorage>().index = i;
@@ -151,9 +162,9 @@ public class GameController : MonoBehaviour
     private void RefillAllShelves()
     {
         int counter = 0;
-        for(int i=0; i<3; i++)
+        for(int i=0; i< CONST.GRID_SIZE; i++)
         {
-            for(int j=0; j<3; j++)
+            for(int j=0; j< CONST.GRID_SIZE; j++)
             {
                 int saveMe = oh.WeighRandomNumber();
                 shelvesCont[counter] = oh.items[saveMe];
@@ -171,11 +182,11 @@ public class GameController : MonoBehaviour
     /// <param name="newItems">The number of objects to refill</param>
     private void RefillObjects(int newItems)
     {
-        int[] emptyNums = new int[9];
+        int[] emptyNums = new int[CONST.GRID_SIZE* CONST.GRID_SIZE];
         int counter = 0;
 
         //Restore existing items to their shelf locations
-        for(int i=0; i<9; i++)
+        for(int i=0; i< CONST.GRID_SIZE * CONST.GRID_SIZE; i++)
         {
             if(ShelvesVis[i] != null)
             {
@@ -195,7 +206,7 @@ public class GameController : MonoBehaviour
         for(int i=0; i<newItems; i++)
         {
             bool spawnedYet = false;
-            for (int j=0; j<9; j++)
+            for (int j=0; j< CONST.GRID_SIZE * CONST.GRID_SIZE; j++)
             {
                 if (ShelvesVis[j]==null && !spawnedYet)
                 {
@@ -226,17 +237,17 @@ public class GameController : MonoBehaviour
     public void HandleResults(int result)
     {
         int count = 0;
-        if(result >= 2)
+        if(result >= orh.NumOfLikes)
         {
             count = 3;
             RefillObjects(count);
         }
-        else if (result < 2 && result > -1)
+        else if (result < orh.NumOfLikes && result >= 0)
         {
             count = 2;
             RefillObjects(count);
         }
-        else if (result > -3)
+        else if (result > -orh.NumOfLikes)
         {
             count = 1;
             RefillObjects(count);
