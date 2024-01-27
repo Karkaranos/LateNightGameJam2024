@@ -20,6 +20,7 @@ public class OrderHandler : MonoBehaviour
 
     private void CreateNewOrder()
     {
+        print(ol.data.Length);
         int clueToTrySaving = WeighRandomNumber(maxRandomNumber);
 
         currLikes[0] = ol.GetClue(clueToTrySaving);
@@ -33,7 +34,7 @@ public class OrderHandler : MonoBehaviour
                 currLikes[1] = ol.GetClue(clueToTrySaving);
             }
         }
-
+        
         while(currDislikes[0] == null)
         {
             clueToTrySaving = WeighRandomNumber(maxRandomNumber);
@@ -42,8 +43,8 @@ public class OrderHandler : MonoBehaviour
                 currDislikes[0] = ol.GetClue(clueToTrySaving);
             }
         }
-
-        while(currDislikes[1] == null)
+        
+        while (currDislikes[1] == null)
         {
             clueToTrySaving = WeighRandomNumber(maxRandomNumber);
             if ((!ol.GetClue(clueToTrySaving).Equals(currLikes[0]) && (!ol.GetClue(clueToTrySaving).Equals(currLikes[1])) && (!ol.GetClue(clueToTrySaving).Equals(currDislikes[0]))))
@@ -67,10 +68,11 @@ public class OrderHandler : MonoBehaviour
     public int WeighRandomNumber(int max)
     {
         int unweighted = Random.Range(0, max);
+        print("Unweighted:" + unweighted);
 
         int[,] weightedValues = ol.WeightedArray();
 
-        for(int i=0; i<ol.data.Length-1; i++)
+        for(int i=0; i<ol.data.Length; i++)
         {
             if(weightedValues[i,0]<= unweighted && unweighted < weightedValues[i,1])
             {

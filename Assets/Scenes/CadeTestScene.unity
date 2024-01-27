@@ -899,7 +899,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c7d3b1dbe745f34a8a41016917e13f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: []
+  data:
+  - clue: a
+    associatedObjects: 03000000
+    weight: 2
+  - clue: b
+    associatedObjects: 0d000000
+    weight: 5
+  - clue: c
+    associatedObjects: 0e000000
+    weight: 2
+  - clue: d
+    associatedObjects: 0b000000
+    weight: 8
 --- !u!4 &1467940244
 Transform:
   m_ObjectHideFlags: 0

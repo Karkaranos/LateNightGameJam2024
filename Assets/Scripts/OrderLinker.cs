@@ -46,9 +46,9 @@ public class OrderLinker : MonoBehaviour
     public int TotalWeights()
     {
         int total = 0;
-        for(int i=0; i<data.Length-1; i++)
+        for(int i=0; i<data.Length; i++)
         {
-            total += data[i].weight;
+            total += (11-data[i].weight);
         }
         return total;
     }
@@ -59,7 +59,7 @@ public class OrderLinker : MonoBehaviour
         int[,] result = new int[data.Length,2];
         int counter = 0;
 
-        for(int i=0; i<data.Length-1; i++)
+        for(int i=0; i<data.Length; i++)
         {
             result[i,0] = counter;
             counter += (11-data[i].weight);

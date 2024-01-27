@@ -12,7 +12,7 @@ public class ObjectHandler : MonoBehaviour
         int total = 0;
         for (int i = 0; i < items.Length - 1; i++)
         {
-            total += items[i].weight;
+            total += (11-items[i].weight);
         }
         return total;
     }
