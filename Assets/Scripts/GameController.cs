@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    Image[,] shelvesVis = new Image[3, 3];
+    public Image[] shelvesVis = new Image[9];
     Objects[,] shelvesCont = new Objects[3, 3];
     ObjectHandler oh;
 
     private void Start()
     {
         oh = FindObjectOfType<ObjectHandler>();
+        RefillAllShelves();
     }
     private void RefillAllShelves()
     {
@@ -20,7 +21,7 @@ public class GameController : MonoBehaviour
             for(int j=0; j<3; j++)
             {
                 shelvesCont[i, j] = oh.items[oh.WeighRandomNumber()];
-                shelvesVis[i, j].sprite = shelvesCont[i, j].visual;
+                shelvesVis[i+j].sprite = shelvesCont[i, j].visual;
             }
         }
 
