@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public Image[] shelvesVis = new Image[9];
+    public GameObject[] shelvesVis = new GameObject[9];
     Objects[,] shelvesCont = new Objects[3, 3];
     ObjectHandler oh;
 
@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
             for(int j=0; j<3; j++)
             {
                 shelvesCont[i, j] = oh.items[oh.WeighRandomNumber()];
-                shelvesVis[i+j].sprite = shelvesCont[i, j].visual;
+                shelvesVis[i+j].GetComponent<SpriteRenderer>().sprite = shelvesCont[i, j].visual;
             }
         }
 
