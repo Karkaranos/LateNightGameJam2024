@@ -419,6 +419,7 @@ MonoBehaviour:
   topRightSpawnPos: {x: -2, y: 4}
   spaceBetweenSpots: 2
   emptyPlace: {fileID: 1095734013450699941, guid: db8658afcabd8e64e8c025b5b256457a, type: 3}
+  maxDupeItems: 2
 --- !u!4 &1243422072
 Transform:
   m_ObjectHideFlags: 0

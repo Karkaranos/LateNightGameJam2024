@@ -35,12 +35,12 @@ public class OrderHandler : MonoBehaviour
     {
         ol = FindObjectOfType<OrderLinker>();
         maxRandomNumber = ol.TotalWeights();
-        CreateNewOrder();
 
         currLikes = new string[NumOfLikes];
         currDislikes = new string[numOfDislikes];
 
         allClues = new int[numOfDislikes + NumOfLikes];
+        CreateNewOrder();
     }
 
     /// <summary>
@@ -56,6 +56,7 @@ public class OrderHandler : MonoBehaviour
 
         bool dupeFound = false;
         int counter = 0;
+
         for(int i=0; i<currLikes.Length; i++)
         {
             while(currLikes[i]==null)

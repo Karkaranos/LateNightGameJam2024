@@ -25,6 +25,9 @@ public class GameController : MonoBehaviour
     private GameObject[] shelvesVis = new GameObject[9];
     Objects[] shelvesCont = new Objects[9];
     private Vector2[] shelfSpot = new Vector2[9];
+    private int[] cItems;
+    [SerializeField]
+    private int maxDupeItems;
 
 
     private ObjectHandler oh;
@@ -41,7 +44,7 @@ public class GameController : MonoBehaviour
 
     private int failCounter = 0;
 
-    private Constants CONST;
+    private int GRID_SIZE = 3;
 
     public GameObject[] ShelvesVis { get => shelvesVis; set => shelvesVis = value; }
 
@@ -75,10 +78,12 @@ public class GameController : MonoBehaviour
 
         //Spawn the shelves
         int counter = 0;
-        for(int i=0; i<CONST.GRID_SIZE; i++)
+
+
+        for(int i=0; i<GRID_SIZE; i++)
         {
             spawnPos.x = topRightSpawnPos.x;
-            for(int j=0; j< CONST.GRID_SIZE; j++)
+            for(int j=0; j< GRID_SIZE; j++)
             {
                 ShelvesVis[counter] = Instantiate(emptyPlace, spawnPos, Quaternion.identity);
                 spawnPos.x += spaceBetweenSpots;
@@ -88,11 +93,15 @@ public class GameController : MonoBehaviour
         }
 
         //Set shelf references
-        for(int i=0; i< CONST.GRID_SIZE * CONST.GRID_SIZE; i++)
+        for(int i=0; i< GRID_SIZE * GRID_SIZE; i++)
         {
             shelfSpot[i] = ShelvesVis[i].transform.position;
             ShelvesVis[i].GetComponent<ConstantStorage>().index = i;
         }
+
+        print("made it this far");
+
+        cItems = new int[GRID_SIZE * GRID_SIZE];
 
         //Populate shelves with objects
         RefillAllShelves();
@@ -162,17 +171,86 @@ public class GameController : MonoBehaviour
     private void RefillAllShelves()
     {
         int counter = 0;
-        for(int i=0; i< CONST.GRID_SIZE; i++)
+        int dupesFound = 0;
+        /*
+        while(counter < 9)
         {
-            for(int j=0; j< CONST.GRID_SIZE; j++)
+            int saveMe = oh.WeighRandomNumber();
+            for (int k = 0; k < currentItems.Length; k++)
+            {
+                if (saveMe == currentItems[k])
+                {
+                    dupesFound++;
+                }
+            }
+            if (dupesFound <= maxDupeItems)
+            {
+                shelvesCont[counter] = oh.items[saveMe];
+                ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
+                ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
+                currentItems[counter] = saveMe;
+                counter++;
+                dupesFound = 0;
+            }
+        }
+
+        */
+
+        while(counter < 9)
+        {
+            dupesFound = 0;
+            int saveMe = oh.WeighRandomNumber();
+            for(int i=0; i<cItems.Length; i++)
+            {
+                if(cItems[i] == saveMe)
+                {
+                    dupesFound++;
+                    print("test");
+                }
+            }
+            if(dupesFound < maxDupeItems)
+            {
+                shelvesCont[counter] = oh.items[saveMe];
+                ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
+                ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
+                cItems[counter] = saveMe;
+                counter++;
+            }
+           
+        }
+
+
+        /*for(int i=0; i< GRID_SIZE * GRID_SIZE; i++)
+        {
+            int saveMe = oh.WeighRandomNumber();
+            shelvesCont[counter] = oh.items[saveMe];
+            ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
+            ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
+            counter++;
+            
+            for (int j=0; j< GRID_SIZE; j++)
             {
                 int saveMe = oh.WeighRandomNumber();
                 shelvesCont[counter] = oh.items[saveMe];
                 ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
                 ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
                 counter++;
+                /*for(int k=0; k<currentItems.Length; k++)
+                {
+                    if(saveMe == currentItems[k])
+                    {
+                        dupesFound++;
+                    }
+                }
+                if(dupesFound <= maxDupeItems)
+                {
+                    shelvesCont[counter] = oh.items[saveMe];
+                    ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
+                    ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
+                    counter++;
+                }
             }
-        }
+        }*/
 
     }
 
@@ -182,11 +260,11 @@ public class GameController : MonoBehaviour
     /// <param name="newItems">The number of objects to refill</param>
     private void RefillObjects(int newItems)
     {
-        int[] emptyNums = new int[CONST.GRID_SIZE* CONST.GRID_SIZE];
+        int[] emptyNums = new int[GRID_SIZE* GRID_SIZE];
         int counter = 0;
 
         //Restore existing items to their shelf locations
-        for(int i=0; i< CONST.GRID_SIZE * CONST.GRID_SIZE; i++)
+        for(int i=0; i< GRID_SIZE * GRID_SIZE; i++)
         {
             if(ShelvesVis[i] != null)
             {
@@ -206,7 +284,7 @@ public class GameController : MonoBehaviour
         for(int i=0; i<newItems; i++)
         {
             bool spawnedYet = false;
-            for (int j=0; j< CONST.GRID_SIZE * CONST.GRID_SIZE; j++)
+            for (int j=0; j< GRID_SIZE * GRID_SIZE; j++)
             {
                 if (ShelvesVis[j]==null && !spawnedYet)
                 {
