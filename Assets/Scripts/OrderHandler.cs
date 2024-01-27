@@ -56,7 +56,7 @@ public class OrderHandler : MonoBehaviour
     /// <summary>
     /// Creates a new order using weighted random numbers
     /// </summary>
-    private void CreateNewOrder()
+    public void CreateNewOrder()
     {
         //Create the first clue
         int clueToTrySaving = WeighRandomNumber(maxRandomNumber);

@@ -251,6 +251,7 @@ public class GameController : MonoBehaviour
             }
         }
 
+
     }
 
 
@@ -282,6 +283,8 @@ public class GameController : MonoBehaviour
             failCounter++;
         }
         print("results processed. You get " + count + " new ingredients.");
+
+        orh.CreateNewOrder();
     }
 
 
