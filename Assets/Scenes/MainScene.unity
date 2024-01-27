@@ -823,7 +823,7 @@ MonoBehaviour:
     associatedObjects: 01000000
     weight: 2
   - clue: water
-    associatedObjects: 01000000
+    associatedObjects: 0100000002000000
     weight: 2
   - clue: slimy
     associatedObjects: 02000000
@@ -835,7 +835,7 @@ MonoBehaviour:
     associatedObjects: 02000000
     weight: 2
   - clue: green
-    associatedObjects: 02000000
+    associatedObjects: 0200000011000000
     weight: 2
   - clue: carbohydrates
     associatedObjects: 05000000
@@ -844,7 +844,7 @@ MonoBehaviour:
     associatedObjects: 05000000
     weight: 2
   - clue: food
-    associatedObjects: 05000000
+    associatedObjects: 050000001100000012000000
     weight: 2
   - clue: cake
     associatedObjects: 07000000
@@ -1166,6 +1166,15 @@ MonoBehaviour:
     weight: 2
   - name: 7
     visual: {fileID: 21300000, guid: be7e77ef04a1a414683dbf6d50132379, type: 3}
+    weight: 2
+  - name: 15
+    visual: {fileID: 21300000, guid: dfe87c66e8d8d4b47ad21c73286466ce, type: 3}
+    weight: 2
+  - name: 17
+    visual: {fileID: 21300000, guid: d84990705cfeed74a9f9d4d8d4a5b97b, type: 3}
+    weight: 2
+  - name: 18
+    visual: {fileID: 21300000, guid: 440f7777e75d91b4bbbce3f74a6c8dbd, type: 3}
     weight: 2
 --- !u!4 &2056039558
 Transform:
