@@ -141,6 +141,7 @@ public class GameController : MonoBehaviour
                     shelvesCont[j] = oh.items[saveMe];
                     shelvesVis[j].GetComponent<SpriteRenderer>().sprite = shelvesCont[j].visual;
                     shelvesVis[j].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
+                    shelvesVis[j].GetComponent<ConstantStorage>().index = j;
                     counter++;
                     spawnedYet = true;
                 }
