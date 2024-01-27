@@ -816,9 +816,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - clue: 
-    associatedObjects: 
-    weight: 0
+  - clue: feathery
+    associatedObjects: 01000000
+    weight: 2
+  - clue: yellow
+    associatedObjects: 01000000
+    weight: 2
+  - clue: water
+    associatedObjects: 01000000
+    weight: 2
+  - clue: slimy
+    associatedObjects: 02000000
+    weight: 2
+  - clue: tongues
+    associatedObjects: 02000000
+    weight: 2
+  - clue: swimming
+    associatedObjects: 02000000
+    weight: 2
+  - clue: green
+    associatedObjects: 02000000
+    weight: 2
+  - clue: carbohydrates
+    associatedObjects: 05000000
+    weight: 2
+  - clue: toasters
+    associatedObjects: 05000000
+    weight: 2
+  - clue: food
+    associatedObjects: 05000000
+    weight: 2
+  - clue: cake
+    associatedObjects: 07000000
+    weight: 2
+  - clue: throwing
+    associatedObjects: 07000000
+    weight: 2
+  - clue: cooking
+    associatedObjects: 07000000
+    weight: 2
+  - clue: white
+    associatedObjects: 07000000
+    weight: 2
 --- !u!4 &1495187619
 Transform:
   m_ObjectHideFlags: 0
