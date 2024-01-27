@@ -33,6 +33,7 @@ public class OrderHandler : MonoBehaviour
     private TMP_Text dreamerNameText;
 
     GameController gc;
+    TutorialController tc;
 
     public int NumOfLikes { get => numOfLikes;}
 
@@ -43,14 +44,24 @@ public class OrderHandler : MonoBehaviour
     void Start()
     {
         ol = FindObjectOfType<OrderLinker>();
+        tc = FindObjectOfType<TutorialController>();
         gc = FindObjectOfType<GameController>();
+
+        
         maxRandomNumber = ol.TotalWeights();
 
         currLikes = new string[NumOfLikes];
         currDislikes = new string[numOfDislikes];
 
         allClues = new int[numOfDislikes + NumOfLikes];
-        CreateNewOrder();
+        if(gc!=null)
+        {
+            CreateNewOrder();
+        }
+        if(tc!=null)
+        {
+            CreateNewTutorialOrder();
+        }
     }
 
     /// <summary>
@@ -115,6 +126,28 @@ public class OrderHandler : MonoBehaviour
         PrintOrder();
     }
 
+    public void CreateNewTutorialOrder()
+    {
+        if(tc.tutorialStage == 0)
+        {
+            currLikes[0] = "Baking";
+            currLikes[1] = "Green";
+            currDislikes[0] = "Yellow";
+            currDislikes[1] = "Sport";
+        }
+
+        if (tc.tutorialStage == 1)
+        {
+            currLikes[0] = "Buildings";
+            currLikes[1] = "Feathery";
+            currDislikes[0] = "Food";
+            currDislikes[1] = "Sport";
+        }
+
+        PrintOrder();
+    }
+
+
     /// <summary>
     /// Displays the made order
     /// </summary>
@@ -137,8 +170,26 @@ public class OrderHandler : MonoBehaviour
         //print(s);
         listText.text = s;
 
-        int name = (int)Random.Range(0, gc.dreamerNames.Length);
-        dreamerNameText.text = gc.dreamerNames[name];
+        if(gc!=null)
+        {
+            int name = (int)Random.Range(0, gc.dreamerNames.Length);
+            dreamerNameText.text = gc.dreamerNames[name];
+        }
+        else if (tc!=null)
+        {
+            if(tc.tutorialStage == 0)
+            {
+                dreamerNameText.text = "Zach";
+            }
+            if(tc.tutorialStage == 1)
+            {
+                dreamerNameText.text = "Gorp";
+            }
+        }
+        else
+        {
+            print("no controllers found");
+        }
 
 
 

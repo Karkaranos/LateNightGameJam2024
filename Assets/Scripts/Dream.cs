@@ -15,6 +15,7 @@ public class Dream : MonoBehaviour
     //References to other scripts
     private OrderHandler oh;
     private GameController gc;
+    private TutorialController tc;
 
     //Required for validation
     private int overlappingIngredients;
@@ -32,6 +33,7 @@ public class Dream : MonoBehaviour
         button.SetActive(false);
         oh = FindObjectOfType<OrderHandler>();
         gc = FindObjectOfType<GameController>();
+        tc = FindObjectOfType<TutorialController>();
     }
 
     /// <summary>
@@ -69,7 +71,15 @@ public class Dream : MonoBehaviour
             }
         }
         ReleaseDream();
-        gc.HandleResults(oh.CheckOrder(checkMe));
+
+        if(gc!=null)
+        {
+            gc.HandleResults(oh.CheckOrder(checkMe));
+        }
+        else
+        {
+            tc.HandleResults(oh.CheckOrder(checkMe));
+        }
     }
 
     /// <summary>
@@ -101,7 +111,14 @@ public class Dream : MonoBehaviour
         for(int i=0; i<3; i++)
         {
             deleteMe[i] = currentObjects[i];
-            gc.ShelvesVis[currentObjects[i].GetComponent<ConstantStorage>().index] = null;
+            if(gc!=null)
+            {
+                gc.ShelvesVis[currentObjects[i].GetComponent<ConstantStorage>().index] = null;
+            }
+            else
+            {
+                tc.ShelvesVis[currentObjects[i].GetComponent<ConstantStorage>().index] = null;
+            }
         }
 
         currentObjects.Clear();

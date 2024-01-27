@@ -3,7 +3,7 @@
 // Author :            Cade R. Naylor
 // Creation Date :     January 26, 2024
 //
-// Brief Description : Handles 
+// Brief Description : Handles weighing objects and calculating weights
 
 *****************************************************************************/
 using UnityEngine;
