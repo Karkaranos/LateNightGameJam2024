@@ -1,5 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+/*****************************************************************************
+// File Name :         Objects.cs
+// Author :            Cade R. Naylor
+// Creation Date :     January 26, 2024
+//
+// Brief Description : Links the name of objects with their image. Weighs their spawn chance. 
+
+*****************************************************************************/
 using UnityEngine;
 
 [System.Serializable]

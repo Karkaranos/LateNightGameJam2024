@@ -1,62 +1,113 @@
-using System.Collections;
-using System.Collections.Generic;
+/*****************************************************************************
+// File Name :         OrderHandler.cs
+// Author :            Cade R. Naylor
+// Creation Date :     January 26, 2024
+//
+// Brief Description : Creates orders following a weighted random system. No clue may 
+                        be used twice per order. Checks if the order is correct.
+
+*****************************************************************************/
 using UnityEngine;
 
 public class OrderHandler : MonoBehaviour
 {
     private OrderLinker ol;
-    private string[] currLikes = new string[2];
-    private string[] currDislikes = new string[2];
+    private string[] currLikes;
+    private string[] currDislikes;
     private int maxRandomNumber;
 
+    private int[] allClues;
 
-    // Start is called before the first frame update
+    [Header("Order Size")]
+    [Range(0, 3)][SerializeField]
+    private int numOfLikes;
+    [Range(0, 3)]
+    [SerializeField]
+    private int numOfDislikes;
+
+    public int NumOfLikes { get => numOfLikes;}
+
+
+    /// <summary>
+    /// Start is called before the first frame update. It gets references to other scripts and creates an order. 
+    /// </summary>
     void Start()
     {
         ol = FindObjectOfType<OrderLinker>();
         maxRandomNumber = ol.TotalWeights();
         CreateNewOrder();
+
+        currLikes = new string[NumOfLikes];
+        currDislikes = new string[numOfDislikes];
+
+        allClues = new int[numOfDislikes + NumOfLikes];
     }
 
+    /// <summary>
+    /// Creates a new order using weighted random numbers
+    /// </summary>
     private void CreateNewOrder()
     {
-        //print(ol.data.Length);
+        //Create the first clue
         int clueToTrySaving = WeighRandomNumber(maxRandomNumber);
-
+        /*
         currLikes[0] = ol.GetClue(clueToTrySaving);
+        allClues[0] = */
 
-        clueToTrySaving = (int)Random.Range(0, ol.data.Length - 1);
-        while(currLikes[1] == null)
+        bool dupeFound = false;
+        int counter = 0;
+        for(int i=0; i<currLikes.Length; i++)
         {
-            clueToTrySaving = WeighRandomNumber(maxRandomNumber);
-            if (!ol.GetClue(clueToTrySaving).Equals(currLikes[0]))
+            while(currLikes[i]==null)
             {
-                currLikes[1] = ol.GetClue(clueToTrySaving);
-            }
-        }
-        
-        while(currDislikes[0] == null)
-        {
-            clueToTrySaving = WeighRandomNumber(maxRandomNumber);
-            if ((!ol.GetClue(clueToTrySaving).Equals(currLikes[0]) && (!ol.GetClue(clueToTrySaving).Equals(currLikes[1]))))
-            {
-                currDislikes[0] = ol.GetClue(clueToTrySaving);
-            }
-        }
-        
-        while (currDislikes[1] == null)
-        {
-            clueToTrySaving = WeighRandomNumber(maxRandomNumber);
-            if ((!ol.GetClue(clueToTrySaving).Equals(currLikes[0]) && (!ol.GetClue(clueToTrySaving).Equals(currLikes[1])) && (!ol.GetClue(clueToTrySaving).Equals(currDislikes[0]))))
-            {
-                currDislikes[1] = ol.GetClue(clueToTrySaving);
+                dupeFound = false;
+                clueToTrySaving = WeighRandomNumber(maxRandomNumber);
+                for(int j=0; j<allClues.Length; j++)
+                {
+                    if(allClues[j] == clueToTrySaving)
+                    {
+                        dupeFound = true;
+                    }
+                }
+                if(!dupeFound)
+                {
+                    currLikes[i] = ol.GetClue(clueToTrySaving);
+                    allClues[counter] = clueToTrySaving;
+                    counter++;
+                }
             }
         }
 
+        for (int i = 0; i < currDislikes.Length; i++)
+        {
+            while (currDislikes[i] == null)
+            {
+                dupeFound = false;
+                clueToTrySaving = WeighRandomNumber(maxRandomNumber);
+                for (int j = 0; j < allClues.Length; j++)
+                {
+                    if (allClues[j] == clueToTrySaving)
+                    {
+                        dupeFound = true;
+                    }
+                }
+                if (!dupeFound)
+                {
+                    currDislikes[i] = ol.GetClue(clueToTrySaving);
+                    allClues[counter] = clueToTrySaving;
+                    counter++;
+                }
+            }
+        }
+
+        //Display the order
         PrintOrder();
     }
 
-    //Used for debugging
+    /// <summary>
+    /// Used for debugging
+    /// Displays the made order in the console
+    /// </summary>
     public void PrintOrder()
     {
         print("Likes:\n" + currLikes[0] + "\n" + currLikes[1] + "\nDislikes:\n" + currDislikes[0] + "\n" + currDislikes[1]);
@@ -65,13 +116,20 @@ public class OrderHandler : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Generates a random number and uses a weighing system to return a clue index
+    /// </summary>
+    /// <param name="max">The max random number</param>
+    /// <returns>A clue index as an int</returns>
     public int WeighRandomNumber(int max)
     {
+        //Generate a random number
         int unweighted = Random.Range(0, max);
-        //print("Unweighted:" + unweighted);
 
+        //Get a reference to the weighted array
         int[,] weightedValues = ol.WeightedArray();
 
+        //Weigh the random number to get a weighed result
         for(int i=0; i<ol.data.Length; i++)
         {
             if(weightedValues[i,0]<= unweighted && unweighted < weightedValues[i,1])
@@ -81,31 +139,46 @@ public class OrderHandler : MonoBehaviour
 
         }
 
+        //Return 0 if nothing was caught
         return 0;
     }
 
+    /// <summary>
+    /// Checks the current order against the criteria and scores it
+    /// </summary>
+    /// <param name="choices">The dream the player made</param>
+    /// <returns>Score</returns>
     public int CheckOrder(Constants.Objects[] choices)
     {
         int score = 0;
         Constants.Objects[] checkMe;
+
+        //Checks each choice against the criteria
         for(int i=0; i< choices.Length; i++)
         {
-            for(int k=0; k<2; k++)
+            //Checks it against the likes
+            for(int k=0; k<currLikes.Length; k++)
             {
+                //Gets the accepted objects for the current clue
                 checkMe = ol.GetObjectsForClue(currLikes[k]);
                 for (int j = 0; j < checkMe.Length; j++)
                 {
+                    //If they match, increase score
                     if (checkMe[j] == choices[i])
                     {
                         score++;
                     }
                 }
             }
-            for (int k = 0; k < 2; k++)
+
+            //Checks it against the dislikes
+            for (int k = 0; k < currDislikes.Length; k++)
             {
+                //Gets the hated objects for the current clue
                 checkMe = ol.GetObjectsForClue(currDislikes[k]);
                 for (int j = 0; j < checkMe.Length; j++)
                 {
+                    //If they match, decrease score
                     if (checkMe[j] == choices[i])
                     {
                         score--;
@@ -113,8 +186,17 @@ public class OrderHandler : MonoBehaviour
                 }
             }
         }
-        print(score);
 
+        for(int i=0; i<currLikes.Length; i++)
+        {
+            currLikes[i] = null;
+        }
+        for (int i = 0; i < currDislikes.Length; i++)
+        {
+            currDislikes[i] = null;
+        }
+
+        //Return the result
         return score;
         
     }
