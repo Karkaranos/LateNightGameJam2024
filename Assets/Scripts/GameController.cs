@@ -207,6 +207,7 @@ public class GameController : MonoBehaviour
                 shelvesCont[counter] = oh.items[saveMe];
                 ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
                 ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
+                ShelvesVis[counter].GetComponent<ConstantStorage>().index = counter;
                 cItems[counter] = saveMe;
                 counter++;
             }
@@ -270,6 +271,7 @@ public class GameController : MonoBehaviour
                         shelvesCont[j] = oh.items[saveMe];
                         ShelvesVis[j].GetComponent<SpriteRenderer>().sprite = shelvesCont[j].visual;
                         ShelvesVis[j].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
+                        ShelvesVis[j].GetComponent<ConstantStorage>().index = j;
                         cItems[j] = saveMe;
                         print("Check c");
                         counter++;

@@ -35,6 +35,14 @@ public class TitleScreenController : MonoBehaviour
     }
 
     /// <summary>
+    /// Quits the game
+    /// </summary>
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    /// <summary>
     /// Starts the tutorial
     /// </summary>
     public void StartTutorial()
