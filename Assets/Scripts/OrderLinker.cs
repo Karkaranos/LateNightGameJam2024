@@ -9,7 +9,7 @@ public class OrderLinker : MonoBehaviour
 
     public string GetClue(int id)
     {
-        return data[id].clue;
+        return data[id].Clue;
     }
 
     public string GetObjectsForClueString(string clue)
@@ -17,9 +17,9 @@ public class OrderLinker : MonoBehaviour
         Constants.Objects[] result = new Constants.Objects[10];
         for(int i=0; i<data.Length-1; i++)
         {
-            if (data[i].clue.Equals(clue))
+            if (data[i].Clue.Equals(clue))
             {
-                result = data[i].associatedObjects;
+                result = data[i].AssociatedObjects;
             }
         }
         string s = "";
@@ -35,9 +35,9 @@ public class OrderLinker : MonoBehaviour
         Constants.Objects[] result = new Constants.Objects[10];
         for (int i = 0; i < data.Length - 1; i++)
         {
-            if (data[i].clue.Equals(clue))
+            if (data[i].Clue.Equals(clue))
             {
-                result = data[i].associatedObjects;
+                result = data[i].AssociatedObjects;
             }
         }
         return result;
@@ -48,7 +48,7 @@ public class OrderLinker : MonoBehaviour
         int total = 0;
         for(int i=0; i<data.Length; i++)
         {
-            total += (11-data[i].weight);
+            total += (11-data[i].Weight);
         }
         return total;
     }
@@ -62,7 +62,7 @@ public class OrderLinker : MonoBehaviour
         for(int i=0; i<data.Length; i++)
         {
             result[i,0] = counter;
-            counter += (11-data[i].weight);
+            counter += (11-data[i].Weight);
             result[i,1] = counter;
         }
         //PrintArray(result);
