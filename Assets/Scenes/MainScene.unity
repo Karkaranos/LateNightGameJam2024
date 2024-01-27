@@ -1369,6 +1369,15 @@ MonoBehaviour:
   - _clue: Crumbs
     _associatedObjects: 0f000000
     weight: 2
+  - clue: sports
+    associatedObjects: 09000000
+    weight: 2
+  - clue: orange
+    associatedObjects: 09000000
+    weight: 2
+  - clue: bouncing
+    associatedObjects: 09000000
+    weight: 2
 --- !u!4 &1495187619
 Transform:
   m_ObjectHideFlags: 0
@@ -1724,6 +1733,9 @@ MonoBehaviour:
     weight: 2
   - name: 18
     visual: {fileID: 21300000, guid: 440f7777e75d91b4bbbce3f74a6c8dbd, type: 3}
+    weight: 2
+  - name: 9
+    visual: {fileID: 21300000, guid: deb828902b66e56409419425f5c341d4, type: 3}
     weight: 2
 --- !u!4 &2056039558
 Transform:
