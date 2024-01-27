@@ -6,6 +6,6 @@ public class Constants
 {
     public enum Objects
     {
-        NONE, DUCK, 
+        NONE, DUCK, FROG, HOMEWORK, BUILDING_BRICKS, TOAST, CORPORATE_LADDER, EGG, TEDDY_BEAR, BASKETBALL, CD, BLANKET, SNAKE, LAMP, MILK, COOKIE, DINOSAUR, APPLE
     }
 }

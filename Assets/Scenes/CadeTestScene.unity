@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 800206452}
   - component: {fileID: 800206454}
   m_Layer: 0
-  m_Name: test
+  m_Name: Order Randomizer Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,21 +247,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - clue: A
-    associatedObjects: 01000000
+    associatedObjects: 00000000
+    weight: 1
   - clue: B
-    associatedObjects: 
+    associatedObjects: 02000000
+    weight: 5
   - clue: C
     associatedObjects: 
+    weight: 10
   - clue: D
     associatedObjects: 
+    weight: 10
   - clue: E
     associatedObjects: 
+    weight: 10
   - clue: F
     associatedObjects: 
+    weight: 10
   - clue: G
     associatedObjects: 
+    weight: 10
   - clue: H
     associatedObjects: 
+    weight: 10
 --- !u!4 &800206453
 Transform:
   m_ObjectHideFlags: 0
