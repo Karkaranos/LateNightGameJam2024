@@ -1,7 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/*****************************************************************************
+// File Name :         Constants.cs
+// Author :            Cade R. Naylor
+// Creation Date :     January 26, 2024
+//
+// Brief Description : Stores game constants such as object names.
 
+*****************************************************************************/
 public class Constants
 {
     public enum Objects
