@@ -134,7 +134,7 @@ public class OrderHandler : MonoBehaviour
             s += currDislikes[i] + "\n";
         }
 
-        print(s);
+        //print(s);
         listText.text = s;
 
         int name = (int)Random.Range(0, gc.dreamerNames.Length);

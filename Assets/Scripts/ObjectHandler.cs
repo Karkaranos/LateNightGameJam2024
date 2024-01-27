@@ -20,7 +20,7 @@ public class ObjectHandler : MonoBehaviour
     public int TotalWeights()
     {
         int total = 0;
-        for (int i = 0; i < items.Length - 1; i++)
+        for (int i = 0; i < items.Length; i++)
         {
             total += (11-items[i].weight);
         }
@@ -34,12 +34,11 @@ public class ObjectHandler : MonoBehaviour
     /// <returns>Returns a 2D int Array that stores weights</returns>
     public int[,] WeightedArray()
     {
-        max = TotalWeights();
         int[,] result = new int[items.Length, 2];
         int counter = 0;
 
         //Generates the weighted array
-        for (int i = 0; i < items.Length - 1; i++)
+        for (int i = 0; i < items.Length; i++)
         {
             result[i, 0] = counter;
             counter += (11 - items[i].weight);
@@ -56,6 +55,7 @@ public class ObjectHandler : MonoBehaviour
     /// <returns>Index of object to generate</returns>
     public int WeighRandomNumber()
     {
+        max = TotalWeights();
         //Generates a random number
         int unweighted = Random.Range(0, max);
 
@@ -63,7 +63,7 @@ public class ObjectHandler : MonoBehaviour
         int[,] weightedValues = WeightedArray();
 
         //Weighs the random number and returns the result
-        for (int i = 0; i < items.Length - 1; i++)
+        for (int i = 0; i < items.Length; i++)
         {
             if (weightedValues[i, 0] <= unweighted && unweighted < weightedValues[i, 1])
             {

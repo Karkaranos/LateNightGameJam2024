@@ -21,11 +21,15 @@ public class Dream : MonoBehaviour
     private Constants.Objects[] checkMe = new Constants.Objects[3];
     private List<GameObject> currentObjects = new List<GameObject>();
 
+    [SerializeField]
+    private GameObject button;
+
     /// <summary>
     /// Start is called on the first frame update. It gets references to other scripts.                                
     /// </summary>
     private void Start()
     {
+        button.SetActive(false);
         oh = FindObjectOfType<OrderHandler>();
         gc = FindObjectOfType<GameController>();
     }
@@ -45,15 +49,27 @@ public class Dream : MonoBehaviour
             //If the required amount of ingredients per dream is met, check it
             if (overlappingIngredients == 3)
             {
-                //Store them in an array that can be checked and release the dream
-                for (int i = 0; i < 3; i++)
-                {
-                    checkMe[i] = currentObjects[i].GetComponent<ConstantStorage>().itemName;
-                }
-                ReleaseDream();
-                gc.HandleResults(oh.CheckOrder(checkMe));
+                button.SetActive(true);
             }
         }
+    }
+
+    /// <summary>
+    /// Occurs when the button is pressed. Sends the dream off and calls handling the results.
+    /// </summary>
+    public void ButtonPress()
+    {
+        button.SetActive(false);
+        //Store them in an array that can be checked and release the dream
+        for (int i = 0; i < 3; i++)
+        {
+            if(currentObjects[i]!=null)
+            {
+                checkMe[i] = currentObjects[i].GetComponent<ConstantStorage>().itemName;
+            }
+        }
+        ReleaseDream();
+        gc.HandleResults(oh.CheckOrder(checkMe));
     }
 
     /// <summary>
@@ -67,7 +83,12 @@ public class Dream : MonoBehaviour
         {
             currentObjects.Remove(collision.gameObject);
             overlappingIngredients--;
+            if (overlappingIngredients < 3)
+            {
+                button.SetActive(false);
+            }
         }
+
     }
 
     /// <summary>

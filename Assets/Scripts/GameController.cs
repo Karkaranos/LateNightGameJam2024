@@ -12,7 +12,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System;
 using System.IO;
-
+using TMPro;
 public class GameController : MonoBehaviour
 {
     #region Variables
@@ -26,9 +26,20 @@ public class GameController : MonoBehaviour
     private GameObject[] shelvesVis = new GameObject[9];
     Objects[] shelvesCont = new Objects[9];
     private Vector2[] shelfSpot = new Vector2[9];
-    private int[] cItems;
+    public int[] cItems;
     [SerializeField]
     private int maxDupeItems;
+
+    [Header("UI")]
+    [SerializeField]
+    private GameObject button;
+    [SerializeField]
+    private TMP_Text roundEndText;
+
+    private int currentObjects;
+
+    [HideInInspector]
+    public bool roundEnd = false;
 
 
     private ObjectHandler oh;
@@ -103,9 +114,12 @@ public class GameController : MonoBehaviour
             ShelvesVis[i].GetComponent<ConstantStorage>().index = i;
         }
 
-        print("made it this far");
 
         cItems = new int[GRID_SIZE * GRID_SIZE];
+        for(int i=0; i<cItems.Length; i++)
+        {
+            cItems[i] = oh.items.Length + 5;
+        }
 
         //Populate shelves with objects
         RefillAllShelves();
@@ -207,15 +221,18 @@ public class GameController : MonoBehaviour
     /// <param name="newItems">The number of objects to refill</param>
     private void RefillObjects(int newItems)
     {
+        currentObjects = 0;
         int[] emptyNums = new int[GRID_SIZE* GRID_SIZE];
         int counter = 0;
+        int dupesFound = 0;
 
         //Restore existing items to their shelf locations
-        for(int i=0; i< GRID_SIZE * GRID_SIZE; i++)
+        for (int i=0; i< GRID_SIZE * GRID_SIZE; i++)
         {
             if(ShelvesVis[i] != null)
             {
                 ShelvesVis[i].transform.position = shelfSpot[i];
+                currentObjects++;
             }
             else
             //If an item doesn't exist, add it to the blank space array
@@ -225,7 +242,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        counter = 0;
+        //counter = 0;
 
         //Fill the blank spaces...if the number of new items added allows
         for(int i=0; i<newItems; i++)
@@ -235,20 +252,41 @@ public class GameController : MonoBehaviour
             {
                 if (ShelvesVis[j]==null && !spawnedYet)
                 {
-                    //Spawn the object and give it an appearance
-                    ShelvesVis[j] = Instantiate(emptyPlace);
-                    ShelvesVis[j].transform.position = shelfSpot[j];
+                    dupesFound = 0;
                     int saveMe = oh.WeighRandomNumber();
-                    shelvesCont[j] = oh.items[saveMe];
 
-                    //Set the object's variables
-                    ShelvesVis[j].GetComponent<SpriteRenderer>().sprite = shelvesCont[j].visual;
-                    ShelvesVis[j].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
-                    ShelvesVis[j].GetComponent<ConstantStorage>().index = j;
-                    counter++;
-                    spawnedYet = true;
+                    for (int k = 0; k < cItems.Length; k++)
+                    {
+                        if (cItems[k] == saveMe)
+                        {
+                            dupesFound++;
+                        }
+                    }
+                    if (dupesFound < maxDupeItems)
+                    {
+                        //Spawn the object and give it an appearance
+                        ShelvesVis[j] = Instantiate(emptyPlace);
+                        ShelvesVis[j].transform.position = shelfSpot[j];
+                        shelvesCont[j] = oh.items[saveMe];
+                        ShelvesVis[j].GetComponent<SpriteRenderer>().sprite = shelvesCont[j].visual;
+                        ShelvesVis[j].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
+                        cItems[j] = saveMe;
+                        print("Check c");
+                        counter++;
+                        spawnedYet = true;
+                    }
                 }
             }
+        }
+
+        if(currentObjects >=3)
+        {
+            orh.CreateNewOrder();
+        }
+        else
+        {
+            button.SetActive(true);
+            roundEnd = true;
         }
 
 
@@ -262,29 +300,51 @@ public class GameController : MonoBehaviour
     /// <param name="result"></param>
     public void HandleResults(int result)
     {
-        int count = 0;
-        if(result >= orh.NumOfLikes)
+        currentObjects = 0;
+
+        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++)
         {
-            count = 3;
-            RefillObjects(count);
+            if (ShelvesVis[i] != null)
+            {
+                currentObjects++;
+            }
         }
-        else if (result < orh.NumOfLikes && result >= 0)
+
+
+        if (currentObjects == 0)
         {
-            count = 2;
-            RefillObjects(count);
-        }
-        else if (result > -orh.NumOfLikes)
-        {
-            count = 1;
-            RefillObjects(count);
+            roundEndText.text = "Round Over";
+            roundEnd = true;
         }
         else
         {
-            failCounter++;
-        }
-        print("results processed. You get " + count + " new ingredients.");
+            int count = 0;
+            if (result >= orh.NumOfLikes)
+            {
+                count = 3;
+                RefillObjects(count);
+            }
+            else if (result < orh.NumOfLikes && result >= 0)
+            {
+                count = 2;
+                RefillObjects(count);
+            }
+            else if (result > -orh.NumOfLikes)
+            {
+                count = 1;
+                RefillObjects(count);
+            }
+            else
+            {
+                failCounter++;
+                RefillObjects(0);
+            }
+            print("results processed. You get " + count + " new ingredients.");
 
-        orh.CreateNewOrder();
+
+        }
+
+
     }
 
 
