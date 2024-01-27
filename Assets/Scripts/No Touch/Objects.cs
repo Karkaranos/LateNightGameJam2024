@@ -6,6 +6,11 @@ using UnityEngine;
 public class Objects
 {
     [Header("Linking objects and Images")]
+    public Constants.Objects name;
     public Sprite visual;
-    public Constants.Objects objs;
+
+
+    [Header("Weight for Refilling")]
+    [Range(1, 10)]
+    public int weight;
 }
