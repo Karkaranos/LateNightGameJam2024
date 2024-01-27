@@ -20,7 +20,7 @@ public class OrderHandler : MonoBehaviour
 
     private void CreateNewOrder()
     {
-        print(ol.data.Length);
+        //print(ol.data.Length);
         int clueToTrySaving = WeighRandomNumber(maxRandomNumber);
 
         currLikes[0] = ol.GetClue(clueToTrySaving);
@@ -68,7 +68,7 @@ public class OrderHandler : MonoBehaviour
     public int WeighRandomNumber(int max)
     {
         int unweighted = Random.Range(0, max);
-        print("Unweighted:" + unweighted);
+        //print("Unweighted:" + unweighted);
 
         int[,] weightedValues = ol.WeightedArray();
 
@@ -98,7 +98,6 @@ public class OrderHandler : MonoBehaviour
                     if (checkMe[j] == choices[i])
                     {
                         score++;
-                        print("Found like");
                     }
                 }
             }
@@ -114,6 +113,7 @@ public class OrderHandler : MonoBehaviour
                 }
             }
         }
+        print(score);
 
         return score;
         
