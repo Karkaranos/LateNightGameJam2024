@@ -205,7 +205,7 @@ public class GameController : MonoBehaviour
                 if(cItems[i] == saveMe)
                 {
                     dupesFound++;
-                    print("test");
+                    //print("test");
                 }
             }
             if(dupesFound < maxDupeItems)
