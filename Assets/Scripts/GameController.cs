@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System;
+using System.IO;
 
 public class GameController : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class GameController : MonoBehaviour
     private int failCounter = 0;
 
     private int GRID_SIZE = 3;
+    [SerializeField] private string _filePath;
+    public string[] dreamerNames;
 
     public GameObject[] ShelvesVis { get => shelvesVis; set => shelvesVis = value; }
 
@@ -58,6 +61,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        dreamerNames = File.ReadAllLines(Application.streamingAssetsPath + _filePath)[0].Split(",");
         oh = FindObjectOfType<ObjectHandler>();
         orh = FindObjectOfType<OrderHandler>();
 
@@ -172,29 +176,6 @@ public class GameController : MonoBehaviour
     {
         int counter = 0;
         int dupesFound = 0;
-        /*
-        while(counter < 9)
-        {
-            int saveMe = oh.WeighRandomNumber();
-            for (int k = 0; k < currentItems.Length; k++)
-            {
-                if (saveMe == currentItems[k])
-                {
-                    dupesFound++;
-                }
-            }
-            if (dupesFound <= maxDupeItems)
-            {
-                shelvesCont[counter] = oh.items[saveMe];
-                ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
-                ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
-                currentItems[counter] = saveMe;
-                counter++;
-                dupesFound = 0;
-            }
-        }
-
-        */
 
         while(counter < 9)
         {
@@ -205,7 +186,6 @@ public class GameController : MonoBehaviour
                 if(cItems[i] == saveMe)
                 {
                     dupesFound++;
-                    //print("test");
                 }
             }
             if(dupesFound < maxDupeItems)
@@ -218,39 +198,6 @@ public class GameController : MonoBehaviour
             }
            
         }
-
-
-        /*for(int i=0; i< GRID_SIZE * GRID_SIZE; i++)
-        {
-            int saveMe = oh.WeighRandomNumber();
-            shelvesCont[counter] = oh.items[saveMe];
-            ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
-            ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
-            counter++;
-            
-            for (int j=0; j< GRID_SIZE; j++)
-            {
-                int saveMe = oh.WeighRandomNumber();
-                shelvesCont[counter] = oh.items[saveMe];
-                ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
-                ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
-                counter++;
-                /*for(int k=0; k<currentItems.Length; k++)
-                {
-                    if(saveMe == currentItems[k])
-                    {
-                        dupesFound++;
-                    }
-                }
-                if(dupesFound <= maxDupeItems)
-                {
-                    shelvesCont[counter] = oh.items[saveMe];
-                    ShelvesVis[counter].GetComponent<SpriteRenderer>().sprite = shelvesCont[counter].visual;
-                    ShelvesVis[counter].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
-                    counter++;
-                }
-            }
-        }*/
 
     }
 

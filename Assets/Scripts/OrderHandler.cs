@@ -8,6 +8,7 @@
 
 *****************************************************************************/
 using UnityEngine;
+using TMPro;
 
 public class OrderHandler : MonoBehaviour
 {
@@ -25,6 +26,14 @@ public class OrderHandler : MonoBehaviour
     [SerializeField]
     private int numOfDislikes;
 
+    [Header("Visual Aspects")]
+    [SerializeField]
+    private TMP_Text listText;
+    [SerializeField]
+    private TMP_Text dreamerNameText;
+
+    GameController gc;
+
     public int NumOfLikes { get => numOfLikes;}
 
 
@@ -34,6 +43,7 @@ public class OrderHandler : MonoBehaviour
     void Start()
     {
         ol = FindObjectOfType<OrderLinker>();
+        gc = FindObjectOfType<GameController>();
         maxRandomNumber = ol.TotalWeights();
 
         currLikes = new string[NumOfLikes];
@@ -106,14 +116,35 @@ public class OrderHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Used for debugging
-    /// Displays the made order in the console
+    /// Displays the made order
     /// </summary>
     public void PrintOrder()
     {
-        print("Likes:\n" + currLikes[0] + "\n" + currLikes[1] + "\nDislikes:\n" + currDislikes[0] + "\n" + currDislikes[1]);
+        string s = "Likes:\n";
 
-        print("Objects for Like #1:" + ol.GetObjectsForClueString(currLikes[0]));
+        for(int i=0; i<currLikes.Length; i++)
+        {
+            s += currLikes[i] + "\n";
+        }
+
+        s += "Dislikes:\n";
+
+        for (int i = 0; i < currDislikes.Length; i++)
+        {
+            s += currDislikes[i] + "\n";
+        }
+
+        print(s);
+        listText.text = s;
+
+        int name = (int)Random.Range(0, gc.dreamerNames.Length);
+        dreamerNameText.text = gc.dreamerNames[name];
+
+
+
+        //print("Likes:\n" + currLikes[0] + "\n" + currLikes[1] + "\nDislikes:\n" + currDislikes[0] + "\n" + currDislikes[1]);
+
+        //print("Objects for Like #1:" + ol.GetObjectsForClueString(currLikes[0]));
 
     }
 
