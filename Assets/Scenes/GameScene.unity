@@ -3505,7 +3505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topRightSpawnPos: {x: 2.7, y: 3.6}
-  spaceBetweenSpots: 2
+  spaceBetweenSpots: 2.5
   emptyPlace: {fileID: 1095734013450699941, guid: db8658afcabd8e64e8c025b5b256457a, type: 3}
   cItems: 
   maxDupeItems: 2
