@@ -20,6 +20,10 @@ public class TitleScreenController : MonoBehaviour
     private void Start()
     {
         am = FindObjectOfType<AudioManager>();
+        if (PlayerPrefs.HasKey("HighScore") == false)
+        {
+            PlayerPrefs.SetInt("HighScore", 0);
+        }
     }
 
     /// <summary>
