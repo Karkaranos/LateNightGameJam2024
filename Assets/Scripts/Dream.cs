@@ -25,6 +25,8 @@ public class Dream : MonoBehaviour
     [SerializeField]
     private GameObject button;
 
+    private int max;
+
     /// <summary>
     /// Start is called on the first frame update. It gets references to other scripts.                                
     /// </summary>
@@ -63,12 +65,22 @@ public class Dream : MonoBehaviour
     {
         button.SetActive(false);
         //Store them in an array that can be checked and release the dream
-        for (int i = 0; i < 3; i++)
+        max = currentObjects.Count;
+        if(currentObjects.Count > 3)
+        {
+            max = 3;
+        }
+        for (int i = 0; i < max; i++)
         {
             if(currentObjects[i]!=null)
             {
                 checkMe[i] = currentObjects[i].GetComponent<ConstantStorage>().itemName;
             }
+            else
+            {
+                print(i + " is null");
+            }
+
         }
         ReleaseDream();
 
@@ -108,7 +120,7 @@ public class Dream : MonoBehaviour
     {
         GameObject[] deleteMe = new GameObject[3];
         //Null the array references out
-        for(int i=0; i<3; i++)
+        for(int i=0; i<max; i++)
         {
             deleteMe[i] = currentObjects[i];
             if(gc!=null)
@@ -125,7 +137,7 @@ public class Dream : MonoBehaviour
         overlappingIngredients = 0;
 
         //Delete the objects
-        for(int i=0; i<3; i++)
+        for(int i=0; i<max; i++)
         {
             Destroy(deleteMe[i]);
         }

@@ -54,10 +54,7 @@ public class OrderHandler : MonoBehaviour
         currDislikes = new string[numOfDislikes];
 
         allClues = new int[numOfDislikes + NumOfLikes];
-        if(gc!=null)
-        {
-            CreateNewOrder();
-        }
+
         if(tc!=null)
         {
             CreateNewTutorialOrder();
@@ -69,6 +66,7 @@ public class OrderHandler : MonoBehaviour
     /// </summary>
     public void CreateNewOrder()
     {
+        //print("new order made");
         //Create the first clue
         int clueToTrySaving = WeighRandomNumber(maxRandomNumber);
         /*
@@ -124,6 +122,12 @@ public class OrderHandler : MonoBehaviour
 
         //Display the order
         PrintOrder();
+    }
+
+    public void ClearOrder()
+    {
+        dreamerNameText.text = "";
+        listText.text = "";
     }
 
     public void CreateNewTutorialOrder()

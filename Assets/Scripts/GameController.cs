@@ -13,6 +13,8 @@ using UnityEngine.InputSystem;
 using System;
 using System.IO;
 using TMPro;
+using System.Collections.Generic;
+using System.Collections;
 public class GameController : MonoBehaviour
 {
     #region Variables
@@ -35,6 +37,14 @@ public class GameController : MonoBehaviour
     private GameObject button;
     [SerializeField]
     private TMP_Text roundEndText;
+    [SerializeField]
+    private TMP_Text failText;
+    [SerializeField]
+    private GameObject winCanvas;
+    [SerializeField]
+    private GameObject loseCanvas;
+    [SerializeField]
+    private GameObject gameCanvas;
 
     private int currentObjects;
 
@@ -54,7 +64,9 @@ public class GameController : MonoBehaviour
 
     private GameObject currentlyGrabbed;
 
-    private int failCounter = 0;
+    private string failCounter = "";
+
+    private int days = 1;
 
     private int GRID_SIZE = 3;
     [SerializeField] private string _filePath;
@@ -121,8 +133,14 @@ public class GameController : MonoBehaviour
             cItems[i] = oh.items.Length + 5;
         }
 
-        //Populate shelves with objects
-        RefillAllShelves();
+        for(int i=0; i<GRID_SIZE * GRID_SIZE; i++)
+        {
+            GameObject temp = ShelvesVis[i];
+            Destroy(temp);
+        }
+
+        StartCoroutine(StartDay());
+
 
 
     }
@@ -183,6 +201,59 @@ public class GameController : MonoBehaviour
         }
     }
 
+    IEnumerator StartDay()
+    {
+        roundEndText.text = "Day " + ToText(days) + " of your Dream Job";
+        yield return new WaitForSeconds(3f);
+        roundEndText.text = "";
+        //Populate shelves with objects
+        RefillAllShelves();
+        orh.CreateNewOrder();
+    }
+
+    private string ToText(int num)
+    {
+        string s;
+        switch (num)
+        {
+            case 1:
+                s = "One";
+                break;
+            case 2:
+                s = "Two";
+                break;
+            case 3:
+                s = "Three";
+                break;
+            case 4:
+                s = "Four";
+                break;
+            case 5:
+                s = "Five";
+                break;
+            case 6:
+                s = "Six";
+                break;
+            case 7:
+                s = "Seven";
+                break;
+            case 8:
+                s = "Eight";
+                break;
+            case 9:
+                s = "Nine";
+                break;
+            case 10:
+                s = "Ten";
+                break;
+            default:
+                s = "???";
+                break;
+        }
+        return s;
+     
+    }
+
     /// <summary>
     /// Refills all of the shelves with random objects
     /// </summary>
@@ -191,8 +262,16 @@ public class GameController : MonoBehaviour
         int counter = 0;
         int dupesFound = 0;
 
-        while(counter < 9)
+
+        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++)
         {
+            ShelvesVis[i] = Instantiate(emptyPlace, shelfSpot[i], Quaternion.identity);
+
+        }
+
+        while (counter < 9)
+        {
+
             dupesFound = 0;
             int saveMe = oh.WeighRandomNumber();
             for(int i=0; i<cItems.Length; i++)
@@ -272,10 +351,10 @@ public class GameController : MonoBehaviour
                         ShelvesVis[j].GetComponent<SpriteRenderer>().sprite = shelvesCont[j].visual;
                         ShelvesVis[j].GetComponent<ConstantStorage>().itemName = oh.items[saveMe].name;
                         ShelvesVis[j].GetComponent<ConstantStorage>().index = j;
-                        cItems[j] = saveMe;
-                        print("Check c");
+                        cItems[j] = saveMe;                        
                         counter++;
                         spawnedYet = true;
+                        currentObjects++;
                     }
                 }
             }
@@ -317,28 +396,35 @@ public class GameController : MonoBehaviour
         {
             roundEndText.text = "Round Over";
             roundEnd = true;
+            StartCoroutine(RoundEndFunc());
         }
+
         else
         {
             int count = 0;
-            if (result >= orh.NumOfLikes)
+            if (result >= orh.NumOfLikes+1)
             {
                 count = 3;
                 RefillObjects(count);
             }
-            else if (result < orh.NumOfLikes && result >= 0)
+            else if (result >= orh.NumOfLikes -1)
             {
                 count = 2;
                 RefillObjects(count);
             }
-            else if (result > -orh.NumOfLikes)
+            else if (result > -orh.NumOfLikes + 1)
             {
                 count = 1;
                 RefillObjects(count);
             }
             else
             {
-                failCounter++;
+                failCounter+= "X";
+                failText.text = failCounter;
+                if(failCounter.Equals("XXX"))
+                {
+                    LoseGame();
+                }
                 RefillObjects(0);
             }
             print("results processed. You get " + count + " new ingredients.");
@@ -349,6 +435,33 @@ public class GameController : MonoBehaviour
 
     }
 
+    private void WinGame()
+    {
+        gameCanvas.SetActive(false);
+        winCanvas.SetActive(true);
+    }
+
+    private void LoseGame()
+    {
+        gameCanvas.SetActive(false);
+        loseCanvas.SetActive(true);
+    }
+
+    IEnumerator RoundEndFunc()
+    {
+        orh.ClearOrder();
+        yield return new WaitForSeconds(3f);
+        roundEndText.text = "";
+        days++;
+        if(days > 5)
+        {
+            WinGame();
+        }
+        else
+        {
+            StartCoroutine(StartDay());
+        }
+    }
 
     #endregion 
 }
