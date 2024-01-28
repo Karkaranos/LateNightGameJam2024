@@ -16,6 +16,7 @@ public class Dream : MonoBehaviour
     private OrderHandler oh;
     private GameController gc;
     private TutorialController tc;
+    private AudioManager am;
 
     //Required for validation
     private int overlappingIngredients;
@@ -37,6 +38,7 @@ public class Dream : MonoBehaviour
         oh = FindObjectOfType<OrderHandler>();
         gc = FindObjectOfType<GameController>();
         tc = FindObjectOfType<TutorialController>();
+        am = FindObjectOfType<AudioManager>();
     }
 
     /// <summary>
@@ -45,6 +47,10 @@ public class Dream : MonoBehaviour
     /// <param name="collision">The object collided with</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (am != null)
+        {
+            am.AddToCloud();
+        }
         allObjects.Clear();
         allObjects.Add(FindAnyObjectByType<ConstantStorage>().gameObject);
         //If the new collision is not in the object list and there are less than 3 ingredients
@@ -77,6 +83,10 @@ public class Dream : MonoBehaviour
     /// </summary>
     public void ButtonPress()
     {
+        if (am != null)
+        {
+            am.PlayClick();
+        }
         button.SetActive(false);
         //Store them in an array that can be checked and release the dream
         max = currentObjects.Count;
@@ -114,6 +124,10 @@ public class Dream : MonoBehaviour
     /// <param name="collision">The object collided with</param>
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (am != null)
+        {
+            am.RemoveFromDream();
+        }
         //If the collision object had been overlapping, remove it from the list
         if (currentObjects.Contains(collision.gameObject))
         {

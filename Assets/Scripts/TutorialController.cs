@@ -48,6 +48,9 @@ public class TutorialController : MonoBehaviour
 
     private ObjectHandler oh;
     private OrderHandler orh;
+    private AudioManager am;
+
+    private bool canDrag = false;
 
     //References to input
     private PlayerInput mouseControls;
@@ -78,6 +81,7 @@ public class TutorialController : MonoBehaviour
     {
         oh = FindObjectOfType<ObjectHandler>();
         orh = FindObjectOfType<OrderHandler>();
+        am = FindObjectOfType<AudioManager>();
 
         mouseControls = GetComponent<PlayerInput>();
         mouseControls.currentActionMap.Enable();
@@ -151,19 +155,24 @@ public class TutorialController : MonoBehaviour
     /// <param name="obj">Click started</param>
     private void LeftClick_started(InputAction.CallbackContext obj)
     {
+        /*if (am != null)
+        {
+            am.PlayClick();
+        }*/
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(currPos), Vector2.zero);
-
-        //Get a reference to the ingredient, if one was encountered
-        try
+        if(canDrag)
         {
-            if (hit.transform.gameObject.tag == "Ingredient")
+            try
             {
-                currentlyGrabbed = hit.transform.gameObject;
+                if (hit.transform.gameObject.tag == "Ingredient")
+                {
+                    currentlyGrabbed = hit.transform.gameObject;
+                }
             }
-        }
-        catch
-        {
-            //stop throwing nulls
+            catch
+            {
+                //stop throwing nulls
+            }
         }
     }
 
@@ -189,6 +198,10 @@ public class TutorialController : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
+        if (am != null)
+        {
+            am.PlayClick();
+        }
         SceneManager.LoadScene("GameScene");
     }
 
@@ -305,25 +318,41 @@ public class TutorialController : MonoBehaviour
         TutorialText();
     }
 
+    public void TutorialNextPressed()
+    {
+        if (am != null)
+        {
+            am.PlayClick();
+        }
+        TutorialText();
+    }
+
     public void TutorialText()
     {
         lineNum++;
         if (lines[lineNum+1].Equals(""))
         {
             tutButton.SetActive(false);
+            canDrag = true;
+        }
+        if(lineNum == 6)
+        {
+            canDrag = false;
         }
         if(lineNum == 7)
         {
             RefillShelves();
         }
-        if(lineNum==11)
+        if(lineNum==10)
         {
+            canDrag = false;
             for (int i = 0; i < shelvesVis.Length; i++)
             {
                 GameObject temp = shelvesVis[i];
                 Destroy(temp);
             }
             list.SetActive(false);
+            
         }
         tutorialText.text = lines[lineNum];
     }
@@ -336,14 +365,19 @@ public class TutorialController : MonoBehaviour
     {
         if(tutorialStage==0)
         {
+            if (am != null)
+            {
+                am.DreamFeedback();
+            }
             RefillObjects(3);
-        }
-        if(tutorialStage == 0)
-        {
             lineNum = 5;
         }
         else if (tutorialStage == 1)
         {
+            if (am != null)
+            {
+                am.NightmareFeedback();
+            }
             lineNum = 9;
         }
         IncreaseTutorial();

@@ -1683,7 +1683,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1863894944}
         m_TargetAssemblyTypeName: TutorialController, Assembly-CSharp
-        m_MethodName: TutorialText
+        m_MethodName: TutorialNextPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

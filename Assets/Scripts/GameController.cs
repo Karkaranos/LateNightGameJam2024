@@ -65,6 +65,7 @@ public class GameController : MonoBehaviour
 
     private ObjectHandler oh;
     private OrderHandler orh;
+    private AudioManager am;
     private Timer timer;
 
     //References to input
@@ -120,6 +121,7 @@ public class GameController : MonoBehaviour
         dreamerNames = File.ReadAllLines(Application.streamingAssetsPath + _filePath)[0].Split(",");
         oh = FindObjectOfType<ObjectHandler>();
         orh = FindObjectOfType<OrderHandler>();
+        am = FindObjectOfType<AudioManager>();
         timer = FindObjectOfType<Timer>();
 
         mouseControls = GetComponent<PlayerInput>();
@@ -209,6 +211,10 @@ public class GameController : MonoBehaviour
     /// <param name="obj">Click started</param>
     private void LeftClick_started(InputAction.CallbackContext obj)
     {
+        /*if (am != null)
+        {
+            am.PlayClick();
+        }*/
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(currPos), Vector2.zero);
 
         //Get a reference to the ingredient, if one was encountered
@@ -244,6 +250,10 @@ public class GameController : MonoBehaviour
 
     IEnumerator StartDay()
     {
+        if (am != null)
+        {
+            am.PlayNightMusic(days);
+        }
         roundEndText.text = "Night " + ToText(days) + " of your Dream Job";
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
@@ -497,19 +507,36 @@ public class GameController : MonoBehaviour
         if ((result >= 0 && currQuota < dailyQuotaOfGood) || (result == 0 && currQuota >= dailyQuotaOfGood))
         {
             newMoney = moneyForDreamFilled;
+            if (am != null)
+            {
+                am.DreamFeedback();
+            }
         }
         else if (result > 0 && currQuota >= dailyQuotaOfGood)
         {
             newMoney = moneyForDreamFilled * quotaFilledMultiplier;
+            if (am != null)
+            {
+                am.DreamFeedback();
+            }
         }
         else if (result < 0)
         {
             newMoney = moneyForNightmareFilled;
+            if (am != null)
+            {
+                am.NightmareFeedback();
+            }
         }
 
         dailyMoneyEarned += newMoney;
 
         scoreText.text = "Daily Earnings: $" + (int)dailyMoneyEarned;
+
+        if(am!=null)
+        {
+            am.KaCHING();
+        }
 
         Vector3 spawnPos = scoreText.transform.position;
         spawnPos.y += Screen.height / 300;
@@ -527,6 +554,7 @@ public class GameController : MonoBehaviour
         gameCanvas.SetActive(false);
         winCanvas.SetActive(true);
         winScore.text = "Your Earnings: $" + totalMoneyEarned;
+
     }
 
     private void LoseGame()
@@ -558,6 +586,10 @@ public class GameController : MonoBehaviour
         if (currQuota < dailyQuotaOfGood)
         {
             failCounter += 'X';
+            if (am != null)
+            {
+                am.PlayFail();
+            }
             failText.text = failCounter;
             if(failCounter.Equals("XXX"))
             {
