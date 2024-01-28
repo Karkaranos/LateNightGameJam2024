@@ -1552,7 +1552,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Failed Dreams- Many people reported. \nGet out now! Or else!"
+  m_text: "Failed Dreams- Many people reported. \nGet out now! Or else! :)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f3811f3751e2ec41bccdfb6c9f7dfc7, type: 2}
   m_sharedMaterial: {fileID: 2696259662643236706, guid: 7f3811f3751e2ec41bccdfb6c9f7dfc7, type: 2}
@@ -2101,7 +2101,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -4161,7 +4161,7 @@ MonoBehaviour:
   - _clue: Green
     _associatedObjects: 02000000110000000c000000
     weight: 2
-  - _clue: Carbohydrates
+  - _clue: Carbs
     _associatedObjects: 050000000f000000
     weight: 2
   - _clue: Toaster
@@ -4169,7 +4169,7 @@ MonoBehaviour:
     weight: 2
   - _clue: Food
     _associatedObjects: 05000000070000000f00000011000000120000000e000000
-    weight: 2
+    weight: 7
   - _clue: Cake
     _associatedObjects: 070000000e000000
     weight: 2
@@ -4223,7 +4223,7 @@ MonoBehaviour:
     weight: 2
   - _clue: Music
     _associatedObjects: 0a00000013000000
-    weight: 2
+    weight: 1
   - _clue: Headphones
     _associatedObjects: 0a00000013000000
     weight: 2
@@ -4232,13 +4232,13 @@ MonoBehaviour:
     weight: 2
   - _clue: Death Metal
     _associatedObjects: 0a00000013000000
-    weight: 2
+    weight: 4
   - _clue: Sleeping
     _associatedObjects: 0b00000008000000
     weight: 2
   - _clue: Comfort
     _associatedObjects: 0b00000008000000
-    weight: 2
+    weight: 5
   - _clue: Beds
     _associatedObjects: 0b000000
     weight: 2
@@ -4248,24 +4248,21 @@ MonoBehaviour:
   - _clue: Slithering
     _associatedObjects: 0c000000
     weight: 2
-  - _clue: Lactose
-    _associatedObjects: 0e000000
-    weight: 2
   - _clue: Liquids
     _associatedObjects: 0e000000
-    weight: 2
+    weight: 3
   - _clue: Santa
     _associatedObjects: 0e0000000f000000
-    weight: 2
+    weight: 8
   - _clue: Heights
     _associatedObjects: 06000000
-    weight: 2
+    weight: 8
   - _clue: Corporations
     _associatedObjects: 06000000
-    weight: 2
+    weight: 8
   - _clue: Climbing
     _associatedObjects: 06000000
-    weight: 2
+    weight: 8
 --- !u!4 &1495187619
 Transform:
   m_ObjectHideFlags: 0
@@ -4962,7 +4959,7 @@ MonoBehaviour:
     weight: 2
   - name: 4
     visual: {fileID: 21300000, guid: a729a087d4117a346a49c2262e473d5c, type: 3}
-    weight: 5
+    weight: 4
   - name: 11
     visual: {fileID: 21300000, guid: 08a47ffa826484748be921d9dd9ce9ab, type: 3}
     weight: 1
@@ -4971,7 +4968,7 @@ MonoBehaviour:
     weight: 7
   - name: 8
     visual: {fileID: 21300000, guid: ac059d47a11f31f4fabe8017be28acc9, type: 3}
-    weight: 3
+    weight: 2
 --- !u!4 &2056039558
 Transform:
   m_ObjectHideFlags: 0

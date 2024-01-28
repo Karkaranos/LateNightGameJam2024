@@ -40,6 +40,7 @@ public class Timer : MonoBehaviour
         }
 
         gc.RoundEndFunc();
+        OrderTimer.text = "";
     }
 
     public void StartTimer()

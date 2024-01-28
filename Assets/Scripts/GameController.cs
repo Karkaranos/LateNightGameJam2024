@@ -180,6 +180,8 @@ public class GameController : MonoBehaviour
             Destroy(temp);
         }
 
+        notebook.SetActive(false);
+
         StartCoroutine(StartDay());
 
 
@@ -257,7 +259,6 @@ public class GameController : MonoBehaviour
         {
             am.PlayNightMusic(days);
         }
-        notebook.SetActive(false);
         roundEndText.text = "Night " + ToText(days) + " of your Dream Job";
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
@@ -583,6 +584,8 @@ public class GameController : MonoBehaviour
             Destroy(temp);
         }
 
+        notebook.SetActive(false);
+
         totalMoneyEarned += dailyMoneyEarned;
         if(totalMoneyEarned > PlayerPrefs.GetInt("HighScore"))
         {
@@ -631,7 +634,7 @@ public class GameController : MonoBehaviour
 
     public void TitleScreen()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("TitleScreen");
     }
 
     #endregion 
