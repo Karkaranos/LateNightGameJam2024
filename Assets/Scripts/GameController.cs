@@ -489,7 +489,7 @@ public class GameController : MonoBehaviour
 
 
 
-            print("results processed. You get " + count + " new ingredients.");
+            //print("results processed. You get " + count + " new ingredients.");
 
 
         }

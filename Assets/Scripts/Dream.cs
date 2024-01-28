@@ -19,7 +19,7 @@ public class Dream : MonoBehaviour
     private AudioManager am;
 
     //Required for validation
-    private int overlappingIngredients;
+    public int overlappingIngredients;
     private Constants.Objects[] checkMe = new Constants.Objects[3];
     private List<GameObject> currentObjects = new List<GameObject>();
     public List<GameObject> allObjects = new List<GameObject>();
@@ -60,9 +60,9 @@ public class Dream : MonoBehaviour
             overlappingIngredients++;
 
             //If the required amount of ingredients per dream is met, check it
-            if(gc!=null)
+            if (gc!=null)
             {
-                if (overlappingIngredients == 3 || (gc.currentObjects <= overlappingIngredients))
+                if (overlappingIngredients == 3 || overlappingIngredients == gc.currentObjects)
                 {
                     button.SetActive(true);
                 }
@@ -102,7 +102,7 @@ public class Dream : MonoBehaviour
             }
             else
             {
-                print(i + " is null");
+                //print(i + " is null");
             }
 
         }

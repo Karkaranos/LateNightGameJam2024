@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   existenceTime: 0.6
-  heightAdjustment: 500
+  heightAdjustment: 300
 --- !u!222 &2749670625382977565
 CanvasRenderer:
   m_ObjectHideFlags: 0
