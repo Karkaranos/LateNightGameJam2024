@@ -2035,7 +2035,7 @@ MonoBehaviour:
     _associatedObjects: 05000000
     weight: 2
   - _clue: Food
-    _associatedObjects: 05000000070000000f000000110000001400000012000000
+    _associatedObjects: 05000000070000000f00000011000000120000000e000000
     weight: 2
   - _clue: Cake
     _associatedObjects: 07000000
@@ -2070,14 +2070,62 @@ MonoBehaviour:
   - _clue: Crumbs
     _associatedObjects: 0f000000
     weight: 2
-  - _clue: 
-    _associatedObjects: 
+  - _clue: Buildings
+    _associatedObjects: 04000000
     weight: 2
-  - _clue: 
-    _associatedObjects: 
+  - _clue: Creativity
+    _associatedObjects: 0400000014000000
     weight: 2
-  - _clue: 
-    _associatedObjects: 
+  - _clue: Pain
+    _associatedObjects: 040000000c000000
+    weight: 2
+  - _clue: Fluffy
+    _associatedObjects: 08000000
+    weight: 2
+  - _clue: Animals
+    _associatedObjects: 0800000001000000020000000c00000010000000
+    weight: 2
+  - _clue: Hibernating
+    _associatedObjects: 08000000
+    weight: 2
+  - _clue: Cubs
+    _associatedObjects: 08000000
+    weight: 2
+  - _clue: Music
+    _associatedObjects: 0a00000013000000
+    weight: 2
+  - _clue: Headphones
+    _associatedObjects: 0a000000
+    weight: 2
+  - _clue: Piano
+    _associatedObjects: 0a00000013000000
+    weight: 2
+  - _clue: Death Metal
+    _associatedObjects: 0a00000013000000
+    weight: 2
+  - _clue: Sleeping
+    _associatedObjects: 0b000000
+    weight: 2
+  - _clue: Comfort
+    _associatedObjects: 0b000000
+    weight: 2
+  - _clue: Beds
+    _associatedObjects: 0b000000
+    weight: 2
+  - _clue: Scales
+    _associatedObjects: 0c000000
+    weight: 2
+  - _clue: Slithering
+    _associatedObjects: 0c000000
+    weight: 2
+  - _clue: Lactose
+    _associatedObjects: 0e000000
+    weight: 2
+  - _clue: Liquids
+    _associatedObjects: 0e000000
+    weight: 2
+  - _clue: Santa
+    _associatedObjects: 0e0000000f000000
     weight: 2
 --- !u!4 &1495187619
 Transform:
@@ -2497,6 +2545,27 @@ MonoBehaviour:
   - name: 9
     visual: {fileID: 21300000, guid: deb828902b66e56409419425f5c341d4, type: 3}
     weight: 1
+  - name: 10
+    visual: {fileID: 21300000, guid: 2918d90120a92914fa0737fa4eea6b26, type: 3}
+    weight: 3
+  - name: 6
+    visual: {fileID: 21300000, guid: 1225d3f2730f4ec4781db42afd1a89a9, type: 3}
+    weight: 10
+  - name: 14
+    visual: {fileID: 21300000, guid: a27a7dfa501f3eb4e9e0ce8d605ee697, type: 3}
+    weight: 2
+  - name: 4
+    visual: {fileID: 21300000, guid: a729a087d4117a346a49c2262e473d5c, type: 3}
+    weight: 5
+  - name: 11
+    visual: {fileID: 21300000, guid: 08a47ffa826484748be921d9dd9ce9ab, type: 3}
+    weight: 1
+  - name: 12
+    visual: {fileID: 21300000, guid: 855b949b8c6c10a4fbabf01d0a8fff4f, type: 3}
+    weight: 7
+  - name: 8
+    visual: {fileID: 21300000, guid: ac059d47a11f31f4fabe8017be28acc9, type: 3}
+    weight: 3
 --- !u!4 &2056039558
 Transform:
   m_ObjectHideFlags: 0
