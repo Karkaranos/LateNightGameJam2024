@@ -161,14 +161,14 @@ public class OrderHandler : MonoBehaviour
 
         for(int i=0; i<currLikes.Length; i++)
         {
-            s += currLikes[i] + "\n";
+            s += "- " + currLikes[i] + "\n";
         }
 
         s += "Dislikes:\n";
 
         for (int i = 0; i < currDislikes.Length; i++)
         {
-            s += currDislikes[i] + "\n";
+            s += "- " + currDislikes[i] + "\n";
         }
 
         //print(s);

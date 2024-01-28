@@ -45,6 +45,8 @@ public class GameController : MonoBehaviour
     private GameObject loseCanvas;
     [SerializeField]
     private GameObject gameCanvas;
+    [SerializeField]
+    private TMP_Text quotaText;
 
     private int currentObjects;
 
@@ -54,6 +56,7 @@ public class GameController : MonoBehaviour
 
     private ObjectHandler oh;
     private OrderHandler orh;
+    private Timer timer;
 
     //References to input
     private PlayerInput mouseControls;
@@ -69,10 +72,22 @@ public class GameController : MonoBehaviour
     private int days = 1;
 
     private int GRID_SIZE = 3;
+
+    [Header("End Conditions")]
+    [SerializeField]
+    private float dayTime;
+    [SerializeField]
+    private int dailyQuotaOfGood;
+    [SerializeField]
+    private int daysPlayed;
+    private int currQuota;
+
+
     [SerializeField] private string _filePath;
     public string[] dreamerNames;
 
     public GameObject[] ShelvesVis { get => shelvesVis; set => shelvesVis = value; }
+    public float DayTime { get => dayTime;}
 
     #endregion
 
@@ -87,6 +102,7 @@ public class GameController : MonoBehaviour
         dreamerNames = File.ReadAllLines(Application.streamingAssetsPath + _filePath)[0].Split(",");
         oh = FindObjectOfType<ObjectHandler>();
         orh = FindObjectOfType<OrderHandler>();
+        timer = FindObjectOfType<Timer>();
 
         mouseControls = GetComponent<PlayerInput>();
         mouseControls.currentActionMap.Enable();
@@ -209,6 +225,8 @@ public class GameController : MonoBehaviour
         //Populate shelves with objects
         RefillAllShelves();
         orh.CreateNewOrder();
+        timer.StartTimer();
+        quotaText.text = "Your Progress: " + currQuota + " / " + dailyQuotaOfGood;
     }
 
     private string ToText(int num)
@@ -292,6 +310,8 @@ public class GameController : MonoBehaviour
             }
            
         }
+
+        orh.CreateNewOrder();
 
     }
 
@@ -394,15 +414,13 @@ public class GameController : MonoBehaviour
 
         if (currentObjects == 0)
         {
-            roundEndText.text = "Round Over";
-            roundEnd = true;
-            StartCoroutine(RoundEndFunc());
+            RefillAllShelves();
         }
 
         else
         {
             int count = 0;
-            if (result >= orh.NumOfLikes+1)
+            if (result >= orh.NumOfLikes + 1)
             {
                 count = 3;
                 RefillObjects(count);
@@ -412,21 +430,30 @@ public class GameController : MonoBehaviour
                 count = 2;
                 RefillObjects(count);
             }
-            else if (result > -orh.NumOfLikes + 1)
+            else if (result > -1)
             {
                 count = 1;
                 RefillObjects(count);
             }
             else
             {
-                failCounter+= "X";
-                failText.text = failCounter;
-                if(failCounter.Equals("XXX"))
-                {
-                    LoseGame();
-                }
                 RefillObjects(0);
             }
+
+            if(result >= 0)
+            {
+                currQuota++;
+                if(currQuota < dailyQuotaOfGood)
+                {
+                    quotaText.text = "Your Progress: " + currQuota + " / " + dailyQuotaOfGood;
+                }
+                else
+                {
+                    quotaText.text = "Daily Quota Met!";
+                }
+            }
+
+
             print("results processed. You get " + count + " new ingredients.");
 
 
@@ -434,6 +461,7 @@ public class GameController : MonoBehaviour
 
 
     }
+
 
     private void WinGame()
     {
@@ -447,13 +475,31 @@ public class GameController : MonoBehaviour
         loseCanvas.SetActive(true);
     }
 
-    IEnumerator RoundEndFunc()
+    public void RoundEndFunc()
     {
+        StartCoroutine(PRIVATERoundEnd());
+    }
+
+    IEnumerator PRIVATERoundEnd()
+    {
+        roundEndText.text = "Round Over";
+        roundEnd = true;
         orh.ClearOrder();
+        if(currQuota < dailyQuotaOfGood)
+        {
+            failCounter += 'X';
+            failText.text = failCounter;
+            roundEndText.text = "Three Strikes, you're out!";
+        }
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
+        if(failCounter.Equals("XXX"))
+        {
+            LoseGame();
+        }
         days++;
-        if(days > 5)
+        dailyQuotaOfGood += 2;
+        if(days > daysPlayed)
         {
             WinGame();
         }

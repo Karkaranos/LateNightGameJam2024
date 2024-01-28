@@ -7,40 +7,43 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     public TMP_Text OrderTimer;
-    public int timeLeft;
-    public int startTime;
+    private int timeLeft;
+    private int startTime;
     private Coroutine timerCoroutine;
+    GameController gc;
 
     // Start is called before the first frame update
     void Start()
     {
-        OrderTimer.text = timeLeft.ToString();
-        timerCoroutine = StartCoroutine(Clock());
+        gc = FindObjectOfType<GameController>();
+        startTime = (int)gc.DayTime * 60;
+        //OrderTimer.text = timeLeft.ToString();
+        //timerCoroutine = StartCoroutine(Clock());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private IEnumerator Clock()
     {
-        while(gameObject != null)
+        while(timeLeft > -1)
         {
-            yield return new WaitForSeconds(1);
-            timeLeft -= 1;
-            OrderTimer.text = timeLeft.ToString();
-            if(timeLeft <= 0)
+            if(timeLeft % 60 < 10)
             {
-                timeLeft = startTime;
+                OrderTimer.text = timeLeft / 60 + ":0" + timeLeft%60;
             }
+            else
+            {
+
+                OrderTimer.text = timeLeft / 60 + ":" + timeLeft % 60;
+            }
+            timeLeft -= 1;
+            yield return new WaitForSeconds(1);
         }
+
+        gc.RoundEndFunc();
     }
 
-    public void RestartTimer()
+    public void StartTimer()
     {
-        StopCoroutine(timerCoroutine);
         timeLeft = startTime;
         timerCoroutine = StartCoroutine(Clock());
     }
