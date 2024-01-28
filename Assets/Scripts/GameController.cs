@@ -389,6 +389,12 @@ public class GameController : MonoBehaviour
             }
         }
 
+        if(currentObjects>0)
+        {
+            orh.CreateNewOrder();
+        }
+
+        /*
         if(currentObjects >=3)
         {
             orh.CreateNewOrder();
@@ -397,7 +403,7 @@ public class GameController : MonoBehaviour
         {
             //button.SetActive(true);
             roundEnd = true;
-        }
+        }*/
 
 
     }

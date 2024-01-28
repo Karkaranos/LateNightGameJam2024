@@ -738,7 +738,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "What a shame. You couldn't even survive a week at your Dream Job. \n\nWe
-    hope some other company will hire you. We'll write you a reccomendation for one
+    hope some other company will hire you. We'll write you a recomendation for one
     that makes nightmares. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b7081447ddcb21448cdcf47a4c714a1, type: 2}
