@@ -2355,7 +2355,7 @@ MonoBehaviour:
     _associatedObjects: 0f000000050000000e00000007000000
     weight: 2
   - _clue: Flour
-    _associatedObjects: 0f000000
+    _associatedObjects: 0f00000005000000
     weight: 2
   - _clue: Crumbs
     _associatedObjects: 0f00000005000000
@@ -2416,6 +2416,15 @@ MonoBehaviour:
     weight: 2
   - _clue: Santa
     _associatedObjects: 0e0000000f000000
+    weight: 2
+  - _clue: Heights
+    _associatedObjects: 06000000
+    weight: 2
+  - _clue: Corporations
+    _associatedObjects: 06000000
+    weight: 2
+  - _clue: Climbing
+    _associatedObjects: 06000000
     weight: 2
 --- !u!4 &1495187619
 Transform:
