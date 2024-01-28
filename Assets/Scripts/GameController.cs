@@ -48,7 +48,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private TMP_Text quotaText;
 
-    private int currentObjects;
+    [HideInInspector]
+    public int currentObjects;
 
     [HideInInspector]
     public bool roundEnd = false;
@@ -482,24 +483,25 @@ public class GameController : MonoBehaviour
 
     IEnumerator PRIVATERoundEnd()
     {
+        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++)
+        {
+            GameObject temp = ShelvesVis[i];
+            Destroy(temp);
+        }
+
         roundEndText.text = "Round Over";
         roundEnd = true;
         orh.ClearOrder();
-        if(currQuota < dailyQuotaOfGood)
-        {
-            failCounter += 'X';
-            failText.text = failCounter;
-            roundEndText.text = "Three Strikes, you're out!";
-        }
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
-        if(failCounter.Equals("XXX"))
+        currQuota = 0;
+
+        if (failCounter.Equals("XXX"))
         {
             LoseGame();
         }
         days++;
-        dailyQuotaOfGood += 2;
-        if(days > daysPlayed)
+        if (days > 5)
         {
             WinGame();
         }

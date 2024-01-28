@@ -21,6 +21,7 @@ public class Dream : MonoBehaviour
     private int overlappingIngredients;
     private Constants.Objects[] checkMe = new Constants.Objects[3];
     private List<GameObject> currentObjects = new List<GameObject>();
+    public List<GameObject> allObjects = new List<GameObject>();
 
     [SerializeField]
     private GameObject button;
@@ -44,6 +45,8 @@ public class Dream : MonoBehaviour
     /// <param name="collision">The object collided with</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        allObjects.Clear();
+        allObjects.Add(FindAnyObjectByType<ConstantStorage>().gameObject);
         //If the new collision is not in the object list and there are less than 3 ingredients
         if (!currentObjects.Contains(collision.gameObject) && overlappingIngredients < 3)
         {
@@ -51,7 +54,7 @@ public class Dream : MonoBehaviour
             overlappingIngredients++;
 
             //If the required amount of ingredients per dream is met, check it
-            if (overlappingIngredients == 3)
+            if (overlappingIngredients == 3 || (gc.currentObjects == overlappingIngredients)
             {
                 button.SetActive(true);
             }
