@@ -47,6 +47,14 @@ public class GameController : MonoBehaviour
     private GameObject gameCanvas;
     [SerializeField]
     private TMP_Text quotaText;
+    [SerializeField]
+    private TMP_Text scoreText;
+    [SerializeField]
+    private GameObject scoreAdd;
+    [SerializeField]
+    private TMP_Text winScore;
+    [SerializeField]
+    private TMP_Text loseScore;
 
     [HideInInspector]
     public int currentObjects;
@@ -75,7 +83,7 @@ public class GameController : MonoBehaviour
 
     private int GRID_SIZE = 3;
 
-    [Header("End Conditions")]
+    [Header("End Conditions and Scoring")]
     [SerializeField]
     private float dayTime;
     [SerializeField]
@@ -83,6 +91,14 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private int daysPlayed;
     private int currQuota;
+    [SerializeField]
+    private float moneyForDreamFilled;
+    [SerializeField]
+    private float moneyForNightmareFilled;
+    [SerializeField]
+    private float quotaFilledMultiplier;
+    private float totalMoneyEarned;
+    private float dailyMoneyEarned;
 
 
     [SerializeField] private string _filePath;
@@ -236,6 +252,7 @@ public class GameController : MonoBehaviour
         orh.CreateNewOrder();
         timer.StartTimer();
         quotaText.text = "Your Progress: " + currQuota + " / " + dailyQuotaOfGood;
+        scoreText.text = "Daily Earnings: $" + dailyMoneyEarned % 100;
     }
 
     private string ToText(int num)
@@ -455,24 +472,51 @@ public class GameController : MonoBehaviour
                 RefillObjects(0);
             }
 
-            if(result >= 0)
-            {
-                currQuota++;
-                if(currQuota < dailyQuotaOfGood)
-                {
-                    quotaText.text = "Your Progress: " + currQuota + " / " + dailyQuotaOfGood;
-                }
-                else
-                {
-                    quotaText.text = "Daily Quota Met!";
-                }
-            }
 
 
             print("results processed. You get " + count + " new ingredients.");
 
 
         }
+
+        if (result >= 0)
+        {
+            currQuota++;
+            if (currQuota < dailyQuotaOfGood)
+            {
+                quotaText.text = "Your Progress: " + currQuota + " / " + dailyQuotaOfGood;
+            }
+            else
+            {
+                quotaText.text = "Daily Quota Met!";
+            }
+        }
+
+        float newMoney = 0;
+
+        if ((result >= 0 && currQuota < dailyQuotaOfGood) || (result == 0 && currQuota >= dailyQuotaOfGood))
+        {
+            newMoney = moneyForDreamFilled;
+        }
+        else if (result > 0 && currQuota >= dailyQuotaOfGood)
+        {
+            newMoney = moneyForDreamFilled * quotaFilledMultiplier;
+        }
+        else if (result < 0)
+        {
+            newMoney = moneyForNightmareFilled;
+        }
+
+        dailyMoneyEarned += newMoney;
+
+        scoreText.text = "Daily Earnings: $" + (int)dailyMoneyEarned;
+
+        Vector3 spawnPos = scoreText.transform.position;
+        spawnPos.y += Screen.height / 300;
+
+        GameObject temp = Instantiate(scoreAdd, spawnPos, Quaternion.identity, gameCanvas.transform);
+        temp.GetComponent<PointsBehavior>().Amount = (int)newMoney;
+
 
 
     }
@@ -482,12 +526,14 @@ public class GameController : MonoBehaviour
     {
         gameCanvas.SetActive(false);
         winCanvas.SetActive(true);
+        winScore.text = "Your Earnings: $" + totalMoneyEarned;
     }
 
     private void LoseGame()
     {
         gameCanvas.SetActive(false);
         loseCanvas.SetActive(true);
+        loseScore.text = "Your Earnings: $" + totalMoneyEarned;
     }
 
     public void RoundEndFunc()
@@ -502,6 +548,8 @@ public class GameController : MonoBehaviour
             GameObject temp = ShelvesVis[i];
             Destroy(temp);
         }
+
+        totalMoneyEarned += dailyMoneyEarned;
 
         orh.ClearOrder();
         roundEndText.text = "Round Over";
@@ -518,16 +566,18 @@ public class GameController : MonoBehaviour
         }
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
+        scoreText.text = "";
+        quotaText.text = "";
+        dailyMoneyEarned = 0;
 
         currQuota = 0;
         dailyQuotaOfGood += 2;
-
+        days++;
         if (failCounter.Equals("XXX"))
         {
             LoseGame();
         }
-        days++;
-        if (days > daysPlayed && !failCounter.Equals("XXX"))
+        else if (days > daysPlayed)
         {
             WinGame();
         }
