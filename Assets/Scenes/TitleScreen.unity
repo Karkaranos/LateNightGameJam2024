@@ -1394,7 +1394,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94df4863bcc18f43b435bc05dde68f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sounds: []
+  Sounds:
+  - name: Title Screen Music
+    audClip: {fileID: 8300000, guid: 74234fba1c5e70a49a63edd03a6a68dc, type: 3}
+    clipVolume: 0
+    clipPitch: 0
+    canLoop: 1
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Tutorial Music
+    audClip: {fileID: 8300000, guid: 82c7f8abc675b0a43868c5ec2beac118, type: 3}
+    clipVolume: 0
+    clipPitch: 0
+    canLoop: 1
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Night 1 Music
+    audClip: {fileID: 8300000, guid: 07c533b42e2d7cc41af80eec5fff4b54, type: 3}
+    clipVolume: 0
+    clipPitch: 0
+    canLoop: 1
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Night 2 Music
+    audClip: {fileID: 8300000, guid: 5086559bab3191241a458e43ebb4c396, type: 3}
+    clipVolume: 0
+    clipPitch: 0
+    canLoop: 1
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Night 3 Music
+    audClip: {fileID: 8300000, guid: 3cf6d329cafed9340b7a75bd2fa7b559, type: 3}
+    clipVolume: 0
+    clipPitch: 0
+    canLoop: 1
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Night 4 Music
+    audClip: {fileID: 8300000, guid: 7d6ef16f00b934847b85b8cabbf88752, type: 3}
+    clipVolume: 0
+    clipPitch: 0
+    canLoop: 1
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Night 5 Music
+    audClip: {fileID: 8300000, guid: feb98ece483c3e8499c726417c93fcf4, type: 3}
+    clipVolume: 0
+    clipPitch: 0
+    canLoop: 1
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
   masterMixer: {fileID: 24300002, guid: 51db281a02a79394e98b313b4bb30560, type: 2}
   musicVolume: 0.4
 --- !u!4 &1222807743
