@@ -1040,7 +1040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &313723924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3520,7 +3520,7 @@ MonoBehaviour:
   scoreAdd: {fileID: 3653270722815938969, guid: 6574fe998ec2dcc4db5d76a1d3bc13ea, type: 3}
   winScore: {fileID: 1093492366}
   loseScore: {fileID: 74195036}
-  notebook: {fileID: 0}
+  notebook: {fileID: 1240375859}
   currentObjects: 0
   roundEnd: 0
   dayTime: 1
