@@ -380,8 +380,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1990,8 +1990,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d1613056e7a684ba65ae08edeaaeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfLikes: 2
-  numOfDislikes: 2
+  numOfLikes: 3
+  numOfDislikes: 3
   listText: {fileID: 114296044}
   dreamerNameText: {fileID: 646548397}
 --- !u!114 &1495187618
@@ -2026,7 +2026,7 @@ MonoBehaviour:
     _associatedObjects: 0100000002000000
     weight: 2
   - _clue: Green
-    _associatedObjects: 0200000011000000
+    _associatedObjects: 02000000110000000c000000
     weight: 2
   - _clue: Carbohydrates
     _associatedObjects: 050000000f000000
@@ -2041,7 +2041,7 @@ MonoBehaviour:
     _associatedObjects: 07000000
     weight: 2
   - _clue: Throw
-    _associatedObjects: 07000000
+    _associatedObjects: 0700000009000000
     weight: 2
   - _clue: Cooking
     _associatedObjects: 0700000005000000
@@ -2549,8 +2549,8 @@ MonoBehaviour:
     visual: {fileID: 21300000, guid: 2918d90120a92914fa0737fa4eea6b26, type: 3}
     weight: 3
   - name: 6
-    visual: {fileID: 21300000, guid: 1225d3f2730f4ec4781db42afd1a89a9, type: 3}
-    weight: 10
+    visual: {fileID: 21300000, guid: bce851c7f8f6b7a4b92b596a92b69b18, type: 3}
+    weight: 1
   - name: 14
     visual: {fileID: 21300000, guid: a27a7dfa501f3eb4e9e0ce8d605ee697, type: 3}
     weight: 2

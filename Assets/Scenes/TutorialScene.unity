@@ -337,7 +337,7 @@ MonoBehaviour:
     _associatedObjects: 0f000000
     weight: 2
   - _clue: Crumbs
-    _associatedObjects: 0f000000
+    _associatedObjects: 0f00000005000000
     weight: 2
   - _clue: 
     _associatedObjects: 
