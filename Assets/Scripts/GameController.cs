@@ -495,6 +495,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
         currQuota = 0;
+        dailyQuotaOfGood += 2;
 
         if (failCounter.Equals("XXX"))
         {
