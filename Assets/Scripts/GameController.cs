@@ -538,6 +538,7 @@ public class GameController : MonoBehaviour
 
         scoreText.text = "Daily Earnings: $" + (int)dailyMoneyEarned;
 
+
         if(am!=null)
         {
             am.KaCHING();
@@ -558,7 +559,7 @@ public class GameController : MonoBehaviour
     {
         gameCanvas.SetActive(false);
         winCanvas.SetActive(true);
-        winScore.text = "Your Earnings: $" + totalMoneyEarned;
+        winScore.text = "$" + (int)totalMoneyEarned + "\n" + PlayerPrefs.GetInt("HighScore");
 
     }
 
@@ -566,7 +567,7 @@ public class GameController : MonoBehaviour
     {
         gameCanvas.SetActive(false);
         loseCanvas.SetActive(true);
-        loseScore.text = "Your Earnings: $" + totalMoneyEarned;
+        loseScore.text = "Your Earnings: $" + (int)totalMoneyEarned + "\nBest Earnings: $" + PlayerPrefs.GetInt("HighScore");
     }
 
     public void RoundEndFunc()
@@ -583,6 +584,10 @@ public class GameController : MonoBehaviour
         }
 
         totalMoneyEarned += dailyMoneyEarned;
+        if(totalMoneyEarned > PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", (int)totalMoneyEarned);
+        }
 
         orh.ClearOrder();
         roundEndText.text = "Round Over";
@@ -598,7 +603,7 @@ public class GameController : MonoBehaviour
             failText.text = failCounter;
             if(failCounter.Equals("XXX"))
             {
-                roundEndText.text = "Three Strikes, you're out!";
+                roundEndText.text = "Three Strikes, you're out";
             }
         }
         yield return new WaitForSeconds(3f);
