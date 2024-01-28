@@ -635,7 +635,6 @@ public class GameController : MonoBehaviour
     public void TitleScreen()
     {
         SceneManager.LoadScene("TitleScreen");
-        print("hs");
     }
 
     #endregion 
