@@ -15,6 +15,7 @@ using System.IO;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     #region Variables
@@ -55,6 +56,8 @@ public class GameController : MonoBehaviour
     private TMP_Text winScore;
     [SerializeField]
     private TMP_Text loseScore;
+    [SerializeField]
+    private GameObject notebook;
 
     [HideInInspector]
     public int currentObjects;
@@ -254,6 +257,7 @@ public class GameController : MonoBehaviour
         {
             am.PlayNightMusic(days);
         }
+        notebook.SetActive(false);
         roundEndText.text = "Night " + ToText(days) + " of your Dream Job";
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
@@ -263,6 +267,7 @@ public class GameController : MonoBehaviour
         timer.StartTimer();
         quotaText.text = "Your Progress: " + currQuota + " / " + dailyQuotaOfGood;
         scoreText.text = "Daily Earnings: $" + dailyMoneyEarned % 100;
+        notebook.SetActive(true);
     }
 
     private string ToText(int num)
@@ -617,6 +622,11 @@ public class GameController : MonoBehaviour
         {
             StartCoroutine(StartDay());
         }
+    }
+
+    public void TitleScreen()
+    {
+        SceneManager.LoadScene(0);
     }
 
     #endregion 

@@ -62,7 +62,7 @@ public class Dream : MonoBehaviour
             //If the required amount of ingredients per dream is met, check it
             if(gc!=null)
             {
-                if (overlappingIngredients == 3 || (gc.currentObjects == overlappingIngredients))
+                if (overlappingIngredients == 3 || (gc.currentObjects <= overlappingIngredients))
                 {
                     button.SetActive(true);
                 }
