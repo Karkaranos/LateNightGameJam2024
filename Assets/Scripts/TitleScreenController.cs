@@ -15,6 +15,12 @@ public class TitleScreenController : MonoBehaviour
     private GameObject titleScreen;
     [SerializeField]
     private GameObject creditScreen;
+    private AudioManager am;
+
+    private void Start()
+    {
+        am = FindObjectOfType<AudioManager>();
+    }
 
     /// <summary>
     /// Opens the Game's credits and closes the title screen
@@ -23,6 +29,10 @@ public class TitleScreenController : MonoBehaviour
     {
         creditScreen.SetActive(true);
         titleScreen.SetActive(false);
+        if(am!=null)
+        {
+            am.PlayClick();
+        }
     }
 
     /// <summary>
@@ -32,6 +42,10 @@ public class TitleScreenController : MonoBehaviour
     {
         creditScreen.SetActive(false);
         titleScreen.SetActive(true);
+        if (am != null)
+        {
+            am.PlayClick();
+        }
     }
 
     /// <summary>
@@ -40,6 +54,10 @@ public class TitleScreenController : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+        if (am != null)
+        {
+            am.PlayClick();
+        }
     }
 
     /// <summary>
@@ -48,6 +66,12 @@ public class TitleScreenController : MonoBehaviour
     public void StartTutorial()
     {
         SceneManager.LoadScene("TutorialScene");
+        if (am != null)
+        {
+            am.PlayClick();
+            am.PlayTutorialMusic();
+        }
+
     }
 
     /// <summary>
@@ -56,5 +80,9 @@ public class TitleScreenController : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene");
+        if (am != null)
+        {
+            am.PlayClick();
+        }
     }
 }

@@ -63,6 +63,7 @@ public class AudioManager : MonoBehaviour
             sound.source.playOnAwake = false;
         }
 
+        PlayTitleMusic();
 
         //Cursor.SetCursor(glassTexture, hotSpot, cursorMode);
     }
@@ -171,7 +172,7 @@ public class AudioManager : MonoBehaviour
 
     #endregion
 
-    #region Play Music
+    #region Play
 
     public void StopAllSounds()
     {
@@ -180,5 +181,68 @@ public class AudioManager : MonoBehaviour
             Sounds[i].source.Stop();
         }
     }
+
+    private void StopAllMusic()
+    {
+        for (int i = 3; i < Sounds.Length; i++)
+        {
+            if(Sounds[i].isMusic)
+            {
+                Sounds[i].source.Stop();
+            }
+        }
+    }
+
+    public void PlayNightMusic(int night)
+    {
+        StopAllMusic();
+        Play("Night " + night + " Music");
+    }
+
+    public void DreamFeedback()
+    {
+        int numToPlay = UnityEngine.Random.Range(1, 6);
+        Play("Laughter" + numToPlay);
+    }
+
+    public void NightmareFeedback()
+    {
+        int numToPlay = UnityEngine.Random.Range(1, 4);
+        Play("Nightmare" + numToPlay);
+    }
+
+    public void AddToCloud()
+    {
+        Play("AddToDream");
+    }
+
+    public void RemoveFromDream()
+    {
+        Play("RemoveFromDream");
+    }
+
+    public void PlayTitleMusic()
+    {
+        StopAllMusic();
+        Play("Title Screen Music");
+    }
+
+    public void PlayTutorialMusic()
+    {
+        StopAllMusic();
+        Play("Tutorial Music");
+    }
+
+    public void PlayClick()
+    {
+        Play("ButtonClick");
+    }
+
+    public void PlayFail()
+    {
+        Play("Fail");
+    }
+
+
     #endregion
 }

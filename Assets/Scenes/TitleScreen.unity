@@ -1397,8 +1397,8 @@ MonoBehaviour:
   Sounds:
   - name: Title Screen Music
     audClip: {fileID: 8300000, guid: 74234fba1c5e70a49a63edd03a6a68dc, type: 3}
-    clipVolume: 0
-    clipPitch: 0
+    clipVolume: 1
+    clipPitch: 1
     canLoop: 1
     panStereo: 0
     spacialBlend: 0
@@ -1407,8 +1407,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Tutorial Music
     audClip: {fileID: 8300000, guid: 82c7f8abc675b0a43868c5ec2beac118, type: 3}
-    clipVolume: 0
-    clipPitch: 0
+    clipVolume: 1
+    clipPitch: 1
     canLoop: 1
     panStereo: 0
     spacialBlend: 0
@@ -1417,8 +1417,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Night 1 Music
     audClip: {fileID: 8300000, guid: 07c533b42e2d7cc41af80eec5fff4b54, type: 3}
-    clipVolume: 0
-    clipPitch: 0
+    clipVolume: 1
+    clipPitch: 1
     canLoop: 1
     panStereo: 0
     spacialBlend: 0
@@ -1427,8 +1427,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Night 2 Music
     audClip: {fileID: 8300000, guid: 5086559bab3191241a458e43ebb4c396, type: 3}
-    clipVolume: 0
-    clipPitch: 0
+    clipVolume: 1
+    clipPitch: 1
     canLoop: 1
     panStereo: 0
     spacialBlend: 0
@@ -1437,8 +1437,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Night 3 Music
     audClip: {fileID: 8300000, guid: 3cf6d329cafed9340b7a75bd2fa7b559, type: 3}
-    clipVolume: 0
-    clipPitch: 0
+    clipVolume: 1
+    clipPitch: 1
     canLoop: 1
     panStereo: 0
     spacialBlend: 0
@@ -1447,8 +1447,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Night 4 Music
     audClip: {fileID: 8300000, guid: 7d6ef16f00b934847b85b8cabbf88752, type: 3}
-    clipVolume: 0
-    clipPitch: 0
+    clipVolume: 1
+    clipPitch: 1
     canLoop: 1
     panStereo: 0
     spacialBlend: 0
@@ -1457,9 +1457,129 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Night 5 Music
     audClip: {fileID: 8300000, guid: feb98ece483c3e8499c726417c93fcf4, type: 3}
-    clipVolume: 0
-    clipPitch: 0
+    clipVolume: 1
+    clipPitch: 1
     canLoop: 1
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: ButtonClick
+    audClip: {fileID: 8300000, guid: 668cae8acbef6ce47904e52ef17e02bc, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: AddToDream
+    audClip: {fileID: 8300000, guid: 31f93ed1aaf4f1041a4c54558ce4e18c, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: RemoveFromDream
+    audClip: {fileID: 8300000, guid: 2b4493496a62623468fc798831b3d264, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Nightmare1
+    audClip: {fileID: 8300000, guid: 8ed39c4a10b5a9f44b49385b1a8df84c, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Nightmare2
+    audClip: {fileID: 8300000, guid: 346f0145eecc8c34192344d2aeaec357, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Nightmare3
+    audClip: {fileID: 8300000, guid: 5626f817841ccf44282d962bb3ba7a8c, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Fail
+    audClip: {fileID: 8300000, guid: a08646474205e934685d60315da57027, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Laughter1
+    audClip: {fileID: 8300000, guid: ad34fcd595bdb2043b8cec4f1ffe2c4e, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Laughter2
+    audClip: {fileID: 8300000, guid: 031cb602361e3734b85c0f64e5a5a0ad, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Laughter3
+    audClip: {fileID: 8300000, guid: 7e9edd46207962046b41268fb217db54, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Laughter4
+    audClip: {fileID: 8300000, guid: a8d3aadb0e2e7e545ad56faf4640ddee, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
+    panStereo: 0
+    spacialBlend: 0
+    minSoundDistance: 0
+    maxSoundDistance: 0
+    source: {fileID: 0}
+  - name: Laughter5
+    audClip: {fileID: 8300000, guid: a8d3aadb0e2e7e545ad56faf4640ddee, type: 3}
+    clipVolume: 1
+    clipPitch: 1
+    canLoop: 0
     panStereo: 0
     spacialBlend: 0
     minSoundDistance: 0
