@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c843b7c3338d8469631cf66ccab756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allObjects: []
   button: {fileID: 1865900209}
 --- !u!61 &9238981
 BoxCollider2D:
@@ -1820,8 +1821,9 @@ MonoBehaviour:
   loseCanvas: {fileID: 914304333}
   gameCanvas: {fileID: 1420258739}
   quotaText: {fileID: 1718506490}
+  currentObjects: 0
   roundEnd: 0
-  dayTime: 2
+  dayTime: 1.5
   dailyQuotaOfGood: 4
   daysPlayed: 5
   _filePath: /dreamNames.txt
