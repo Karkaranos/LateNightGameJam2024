@@ -2104,7 +2104,7 @@ MonoBehaviour:
     _associatedObjects: 0a00000013000000
     weight: 2
   - _clue: Sleeping
-    _associatedObjects: 0b000000
+    _associatedObjects: 0b00000008000000
     weight: 2
   - _clue: Comfort
     _associatedObjects: 0b000000
