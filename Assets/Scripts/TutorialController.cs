@@ -50,6 +50,8 @@ public class TutorialController : MonoBehaviour
     private OrderHandler orh;
     private AudioManager am;
 
+    private bool canDrag = false;
+
     //References to input
     private PlayerInput mouseControls;
     private InputAction leftClick;
@@ -153,23 +155,24 @@ public class TutorialController : MonoBehaviour
     /// <param name="obj">Click started</param>
     private void LeftClick_started(InputAction.CallbackContext obj)
     {
-        if (am != null)
+        /*if (am != null)
         {
             am.PlayClick();
-        }
+        }*/
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(currPos), Vector2.zero);
-
-        //Get a reference to the ingredient, if one was encountered
-        try
+        if(canDrag)
         {
-            if (hit.transform.gameObject.tag == "Ingredient")
+            try
             {
-                currentlyGrabbed = hit.transform.gameObject;
+                if (hit.transform.gameObject.tag == "Ingredient")
+                {
+                    currentlyGrabbed = hit.transform.gameObject;
+                }
             }
-        }
-        catch
-        {
-            //stop throwing nulls
+            catch
+            {
+                //stop throwing nulls
+            }
         }
     }
 
@@ -330,19 +333,26 @@ public class TutorialController : MonoBehaviour
         if (lines[lineNum+1].Equals(""))
         {
             tutButton.SetActive(false);
+            canDrag = true;
+        }
+        if(lineNum == 6)
+        {
+            canDrag = false;
         }
         if(lineNum == 7)
         {
             RefillShelves();
         }
-        if(lineNum==11)
+        if(lineNum==10)
         {
+            canDrag = false;
             for (int i = 0; i < shelvesVis.Length; i++)
             {
                 GameObject temp = shelvesVis[i];
                 Destroy(temp);
             }
             list.SetActive(false);
+            
         }
         tutorialText.text = lines[lineNum];
     }

@@ -83,6 +83,7 @@ public class AudioManager : MonoBehaviour
         if (sound != null)
         {
             sound.source.Play();
+            print(audioName + " started");
         }
     }
 
@@ -96,6 +97,7 @@ public class AudioManager : MonoBehaviour
         if (sound != null)
         {
             sound.source.Stop();
+            print(audioName + " stopped");
         }
 
     }
@@ -176,7 +178,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopAllSounds()
     {
-        for (int i = 3; i < Sounds.Length; i++)
+        for (int i = 0; i < Sounds.Length; i++)
         {
             Sounds[i].source.Stop();
         }
@@ -184,11 +186,11 @@ public class AudioManager : MonoBehaviour
 
     private void StopAllMusic()
     {
-        for (int i = 3; i < Sounds.Length; i++)
+        for (int i = 0; i < Sounds.Length; i++)
         {
             if(Sounds[i].isMusic)
             {
-                Sounds[i].source.Stop();
+                Stop(Sounds[i].name);
             }
         }
     }
@@ -243,6 +245,10 @@ public class AudioManager : MonoBehaviour
         Play("Fail");
     }
 
+    public void KaCHING()
+    {
+        Play("GainMoney");
+    }
 
     #endregion
 }

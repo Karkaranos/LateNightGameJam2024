@@ -211,10 +211,10 @@ public class GameController : MonoBehaviour
     /// <param name="obj">Click started</param>
     private void LeftClick_started(InputAction.CallbackContext obj)
     {
-        if (am != null)
+        /*if (am != null)
         {
             am.PlayClick();
-        }
+        }*/
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(currPos), Vector2.zero);
 
         //Get a reference to the ingredient, if one was encountered
@@ -532,6 +532,11 @@ public class GameController : MonoBehaviour
         dailyMoneyEarned += newMoney;
 
         scoreText.text = "Daily Earnings: $" + (int)dailyMoneyEarned;
+
+        if(am!=null)
+        {
+            am.KaCHING();
+        }
 
         Vector3 spawnPos = scoreText.transform.position;
         spawnPos.y += Screen.height / 300;
