@@ -2237,7 +2237,7 @@ MonoBehaviour:
   loseScore: {fileID: 74195036}
   currentObjects: 0
   roundEnd: 0
-  dayTime: 0.1
+  dayTime: 1
   dailyQuotaOfGood: 4
   daysPlayed: 5
   moneyForDreamFilled: 10
