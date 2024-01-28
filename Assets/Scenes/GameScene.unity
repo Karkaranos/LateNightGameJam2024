@@ -4216,7 +4216,7 @@ MonoBehaviour:
     _associatedObjects: 0800000001000000020000000c00000010000000
     weight: 2
   - _clue: Hibernating
-    _associatedObjects: 08000000
+    _associatedObjects: 080000000b000000
     weight: 2
   - _clue: Cubs
     _associatedObjects: 08000000
