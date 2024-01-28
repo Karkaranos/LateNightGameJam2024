@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
     private InputAction leftClick;
     private InputAction rightClick;
     private InputAction mousePos;
+    private InputAction escape;
     private Vector2 currPos;
 
     private GameObject currentlyGrabbed;
@@ -111,9 +112,11 @@ public class GameController : MonoBehaviour
         leftClick = mouseControls.currentActionMap.FindAction("Left Click");
         rightClick = mouseControls.currentActionMap.FindAction("Right Click");
         mousePos = mouseControls.currentActionMap.FindAction("MousePos");
+        escape = mouseControls.currentActionMap.FindAction("Exit");
 
         leftClick.started += LeftClick_started;
         leftClick.canceled += LeftClick_canceled;
+        escape.performed += Quit;
         //rightClick.performed += RightClick_performed;
 
 
@@ -160,6 +163,11 @@ public class GameController : MonoBehaviour
 
 
 
+    }
+
+    private void Quit(InputAction.CallbackContext obj)
+    {
+        Application.Quit();
     }
 
     private void OnDisable()
@@ -387,7 +395,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            button.SetActive(true);
+            //button.SetActive(true);
             roundEnd = true;
         }
 
@@ -489,11 +497,22 @@ public class GameController : MonoBehaviour
             Destroy(temp);
         }
 
+        orh.ClearOrder();
         roundEndText.text = "Round Over";
         roundEnd = true;
-        orh.ClearOrder();
+
+        if (currQuota < dailyQuotaOfGood)
+        {
+            failCounter += 'X';
+            failText.text = failCounter;
+            if(failCounter.Equals("XXX"))
+            {
+                roundEndText.text = "Three Strikes, you're out!";
+            }
+        }
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
+
         currQuota = 0;
         dailyQuotaOfGood += 2;
 
