@@ -228,7 +228,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator StartDay()
     {
-        roundEndText.text = "Day " + ToText(days) + " of your Dream Job";
+        roundEndText.text = "Night " + ToText(days) + " of your Dream Job";
         yield return new WaitForSeconds(3f);
         roundEndText.text = "";
         //Populate shelves with objects
@@ -521,7 +521,7 @@ public class GameController : MonoBehaviour
             LoseGame();
         }
         days++;
-        if (days > 5)
+        if (days > daysPlayed && !failCounter.Equals("XXX"))
         {
             WinGame();
         }

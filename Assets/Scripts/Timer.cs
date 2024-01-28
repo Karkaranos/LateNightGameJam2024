@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         gc = FindObjectOfType<GameController>();
-        startTime = (int)gc.DayTime * 60;
+        startTime = (int)(gc.DayTime * 60);
         //OrderTimer.text = timeLeft.ToString();
         //timerCoroutine = StartCoroutine(Clock());
     }
